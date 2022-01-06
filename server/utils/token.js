@@ -2,6 +2,13 @@ require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
 module.exports = {
+    /**
+     * access token 및 refresh token 생성
+     * access token 및 refresh token이 담긴 객체를 반환
+     * @param uuid 
+     * @param user_id 
+     * @returns { accessToken, refreshToken }
+     */
     generate: (uuid, user_id) => {
         const data = { uuid, user_id, created_at: new Date() };
         const accessToken = jwt.sign(data, process.env.ACCESS_SECRET, { expiresIn: '3h' });
@@ -9,6 +16,14 @@ module.exports = {
 
         return { accessToken, refreshToken };
     },
+    /**
+     * access token 해싱
+     * access token 해싱이 완료되면 Object를 반환
+     * access token이 만료되었다면 true를 반환
+     * access token이 잘못되었다면 false를 반환
+     * @param { authorization } headers 
+     * @returns Object || Boolean
+     */
     hash: (headers) => {
         try {
             const accessToken = headers.authorization.split('Bearer ')[1];
@@ -16,9 +31,21 @@ module.exports = {
 
             return hashData;
         } catch (err) {
-            return null;
+            if (err.name === 'TokenExpiredError') {
+                return true;
+            } else {
+                return false;
+            }
         }
     },
+    /**
+     * access token 및 refresh token 재발급
+     * access token 및 refresh token 재발급이 완료되었다면 Object를 반환
+     * refresh token이 만료되었다면 true를 반환
+     * refresh token이 잘못되었다면 false를 반환
+     * @param { refreshToken } cookies 
+     * @returns Object || Boolean
+     */
     refresh: (cookies) => {
         try {
             const cookieRefreshToken = cookies.refreshToken;
@@ -29,7 +56,11 @@ module.exports = {
 
             return { accessToken, refreshToken };
         } catch (err) {
-            return null;
+            if (err.name === 'TokenExpiredError') {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 }

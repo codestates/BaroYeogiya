@@ -11,23 +11,27 @@ const tokenTest = () => {
     const tokenData = token.generate(uuid, user_id);
 
     if (tokenData !== null) {
+        console.log(tokenData);
         console.log("토큰 생성 테스트 - 성공");
     } else {
         console.log("토큰 생성 테스트 - 실패");
     }
 
-    // 토큰 생성 테스트
+    // 토큰 해싱 테스트
     const hashData = token.hash({ authorization: 'Bearer ' + tokenData.accessToken });
 
-    if (tokenData !== null) {
+    if (hashData.uuid !== undefined) {
+        console.log(hashData);
         console.log("토큰 해싱 테스트 - 성공");
     } else {
         console.log("토큰 해싱 테스트 - 실패");
     }
 
-    const refreshData = token.refresh({ refreshToken: 'tokenData.refreshToken'});
+    const refreshData = token.refresh({ refreshToken: tokenData.refreshToken});
 
-    if (tokenData !== null) {
+    // 토큰 재발급 테스트
+    if (refreshData.accessToken !== undefined) {
+        console.log(refreshData);
         console.log("토큰 재발급 테스트 - 성공");
     } else {
         console.log("토큰 재발급 테스트 - 실패");
