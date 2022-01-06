@@ -134,7 +134,7 @@ module.exports = {
                         message = 'Success!';
                         data = generate(uuid, user_id);
 
-                        res.status(400).send({ message, data });
+                        res.status(200).send({ message, data });
                     }
                 })
             }
@@ -171,11 +171,11 @@ module.exports = {
                 if (result === 0) {
                     message = 'User does not exist.';
 
-                    res.status(401).send({ message });
+                    res.status(400).send({ message });
                 } else {
                     message = 'Success!';
 
-                    res.status(401).send({ message });
+                    res.status(200).send({ message });
                 }
             })
         // 액세스 토큰 만료 처리
