@@ -14,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   store.init({
-    uuid: DataTypes.UUID,
+    uuid: {
+      primaryKey: true,
+      type: DataTypes.UUID
+    },
     address: DataTypes.STRING,
     image: DataTypes.TEXT,
     latitude: DataTypes.DECIMAL,
