@@ -14,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   review.init({
-    uuid: DataTypes.UUID,
+    uuid: {
+      primaryKey: true,
+      type: DataTypes.UUID
+    },
     user_uuid: DataTypes.UUID,
     store_uuid: DataTypes.UUID,
     content: DataTypes.TEXT,

@@ -14,8 +14,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   user_store.init({
-    user_uuid: DataTypes.UUID,
-    store_uuid: DataTypes.UUID
+    user_uuid: {
+      primaryKey: true,
+      type: DataTypes.UUID
+    },
+    store_uuid: {
+      primaryKey: true,
+      type: DataTypes.UUID
+    }
   }, {
     sequelize,
     modelName: 'user_store',
