@@ -10,6 +10,8 @@ module.exports = {
         user_id: "test01",
         pw: "password01",
         name: "테스트01",
+        latitude: 37.531847120450514,
+        longitude: 126.9142190711598,
         created_at: new Date("2022-01-01")
       },
       {
@@ -17,6 +19,8 @@ module.exports = {
         user_id: "test02",
         pw: "password02",
         name: "테스트02",
+        latitude: 37.49605498475844, 
+        longitude: 127.01133120203217,
         created_at: new Date("2022-01-03")
       }
     ];

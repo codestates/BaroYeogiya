@@ -21,6 +21,8 @@ module.exports = (sequelize, DataTypes) => {
     user_id: DataTypes.STRING,
     pw: DataTypes.STRING,
     name: DataTypes.STRING,
+    latitude: DataTypes.DOUBLE,
+    longitude: DataTypes.DOUBLE,
     created_at: DataTypes.DATE
   }, {
     sequelize,

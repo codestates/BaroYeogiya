@@ -20,8 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     address: DataTypes.STRING,
     image: DataTypes.TEXT,
-    latitude: DataTypes.DECIMAL,
-    longitude: DataTypes.DECIMAL
+    latitude: DataTypes.DOUBLE,
+    longitude: DataTypes.DOUBLE
   }, {
     sequelize,
     modelName: 'store',
