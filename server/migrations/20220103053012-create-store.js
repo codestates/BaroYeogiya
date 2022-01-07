@@ -16,11 +16,11 @@ module.exports = {
       },
       latitude: {
         allowNull: false,
-        type: Sequelize.DECIMAL
+        type: Sequelize.DOUBLE
       },
       longitude: {
         allowNull: false,
-        type: Sequelize.DECIMAL
+        type: Sequelize.DOUBLE
       }
     });
   },
