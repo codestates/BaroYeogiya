@@ -55,6 +55,61 @@ module.exports = {
             res.status(401).send({ message });
         }
     },
+    /**
+     * 내 위치 저장 API
+     * @method PUT
+     * @param { authorization } req.headers
+     * @param { latitude, longitude } req.body
+     */
     put: (req, res) => {
+        const hashData = hash(req.headers);
+        const { latitude, longitude } = req.body;
+        let message = '';
+        let data = {};
+
+        // 회원정보 조회
+        if (hashData.uuid !== undefined) {
+            // parameter 유무 확인
+            if (latitude === undefined || longitude === undefined) {
+                message = 'Check your parameter.';
+    
+                res.status(400).send({ message });
+            } else {
+                const { uuid, user_id } = hashData;
+    
+                // 내 위치 저장
+                user.update({
+                    latitude,
+                    longitude
+                }, {
+                    where: {
+                        uuid,
+                        user_id
+                    }
+                }).then(result =>{
+                    if (result[1] === 0) {
+                        message = 'Check your parameter.';
+            
+                        res.status(400).send({ message });
+                    } else {
+                        message = 'Success!';
+                        data.latitude = latitude;
+                        data.longitude = longitude;
+    
+                        res.status(200).send({ message, data });
+                    }
+                })
+            }
+        // 액세스 토큰 만료 처리
+        } else if (hashData) {
+            message = 'The access token has expired.';
+
+            res.status(401).send({ message });
+        // 액세스 토큰이 잘못됨
+        } else {
+            message = 'Check your access token.';
+
+            res.status(401).send({ message });
+        }
     }
 }
