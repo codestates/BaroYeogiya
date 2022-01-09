@@ -11,6 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      // store.belongsToMany(models.user, {
+      //   through: 'user_store',
+      //   foreignKey: 'uuid'
+      // });
+      store.hasOne(models.user_store, { foreignKey: 'store_uuid', sourceKey: 'uuid', onDelete: 'cascade' });
+      store.hasOne(models.review, { foreignKey: 'store_uuid', sourceKey: 'uuid', onDelete: 'cascade' });
     }
   };
   store.init({
@@ -25,6 +31,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'store',
+    timestamps: false,
+    freezeTableName: true
   });
   return store;
 };
