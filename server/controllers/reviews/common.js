@@ -72,7 +72,42 @@ module.exports = {
             res.status(401).send({ message });
         }
     },
+    /**
+     * 리뷰 목록 조회 API
+     * @method GET
+     * @param { store_uuid, offset, limit } req.query 
+     */
     get: (req, res) => {
+        const hashData = hash(req.headers);
+        const { store_uuid } = req.query;
+        let { offset, limit } = req.query;
+        let message = '';
+        let data;
+
+        // parameter 유무 확인
+        if (store_uuid === undefined) {
+            message = 'Check your parameter.';
+
+            res.status(400).send({ message });
+        // 리뷰 목록 조회
+        } else {
+            if (isNaN(offset)) offset = 0;
+            else offset = Number(offset);
+            if (isNaN(limit)) limit = 10;
+            else limit = Number(limit);
+
+            review.findAll({
+                where: {
+                    store_uuid
+                }, 
+                offset: offset * limit,
+                limit
+            }).then(result => {
+                message = 'Success!';
+                data = result.map(el => el.dataValues);
+                res.status(200).send({ message, data });
+            })
+        }
     },
     patch: (req, res) => {
     }
