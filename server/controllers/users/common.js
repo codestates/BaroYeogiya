@@ -1,6 +1,6 @@
 const { v4 } = require('uuid');
 const { user } = require('../../models');
-const { generate, hash, refresh } = require('../../utils/token');
+const { generate, hash } = require('../../utils/token');
 
 /**
  * @path /user
@@ -53,7 +53,7 @@ module.exports = {
     /**
      * 회원정보 조회 API
      * @method GET
-     * @param { authorization } req.header
+     * @param { authorization } req.headers
      */
     get: (req, res) => {
         const hashData = hash(req.headers);
@@ -98,7 +98,7 @@ module.exports = {
     /**
      * 회원정보 수정 API
      * @method PATCH
-     * @param { authorization } req.header
+     * @param { authorization } req.headers
      * @param { pw, name } req.body
      */
     patch: (req, res) => {
@@ -131,9 +131,11 @@ module.exports = {
 
                         res.status(400).send({ message });
                     } else {
+                        const tokenData = generate(uuid, user_id);
                         message = 'Success!';
-                        data = generate(uuid, user_id);
+                        data.accessToken = tokenData.accessToken;
 
+                        res.cookie('refresh', tokenData.refreshToken, { maxAge: 86400000 });
                         res.status(200).send({ message, data });
                     }
                 })
@@ -152,7 +154,7 @@ module.exports = {
     },
     /**
      * 회원정보 삭제 API
-     * @param { authorization } req.header
+     * @param { authorization } req.headers
      */
     delete: (req, res) => {
         const hashData = hash(req.headers);

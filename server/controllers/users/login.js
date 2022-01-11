@@ -1,6 +1,5 @@
-const { v4 } = require('uuid');
 const { user } = require('../../models');
-const { generate, hash, refresh } = require('../../utils/token');
+const { generate } = require('../../utils/token');
 
 /**
  * @path /user/login
@@ -36,10 +35,11 @@ module.exports = {
                     res.status(400).send({ message });
                 // access token과 refresh token 생성
                 } else {
-                    const user_uuid = result.uuid;
-
+                    const tokenData = generate(result.uuid, id);
                     message = 'Success!';
-                    data = generate(user_uuid, id);
+                    data.accessToken = tokenData.accessToken;
+
+                    res.cookie('refresh', tokenData.refreshToken, { maxAge: 86400000 });
                     res.status(200).send({ message, data });
                 }
             })
