@@ -37,7 +37,7 @@ function ModifyUser ({user}) { // 모달창 닫히는 함수 넘어와야 하고
         pw: modifyPw
       };
       axios({
-        url: '54.180.108.24/user',
+        url: `${process.env.REACT_APP_SERVER_URL}/user`,
         method: 'patch',
         data: newUserInfo,
         withCredentials: true
@@ -45,6 +45,7 @@ function ModifyUser ({user}) { // 모달창 닫히는 함수 넘어와야 하고
       .then((res)=>{
         console.log('어때?', res.data)
         // 모달창이 닫히고 회원정보창이 보이는 함수 구현, 마이페이지(UserInfo.js에서 구현해서 넘겨준다)
+        // 마이페이지(회원정보) 만들어지면 함수 만들어서 넘겨주는걸로
       })
       .catch((err)=>{
         console.log('무슨 에러?', err)
