@@ -3,6 +3,10 @@ import React, { useEffect, useState } from 'react';
 import Login from './Components/Modals/Login';
 import axios from 'axios';
 import MainPage from './Pages/MainPage'
+import NavBar from './Components/NavBar'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Mypage from './Pages/Mypage'
+import Map from './Pages/Map'
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -26,15 +30,33 @@ function App() {
   },[]);
 
   return (
-    <>
-      {isLogin? <MainPage isLogin={isLogin} /> :
-        <Login
-          userInfo={userInfo}
-          handleResponse={handleResponse}
-        />
-      }
-      
-    </>
+    <div className="App">
+      <Router>
+        <NavBar />
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              <MainPage />
+            }
+          ></Route> 
+          <Route
+            exact
+            path="/mypage"
+            element={
+              <Mypage />
+            }
+          ></Route>
+          <Route 
+            exact
+            path="/mappage"
+            element={
+              <Map />
+            }></Route>
+        </Routes>
+      </Router>
+      </div>
   );
 }
 
