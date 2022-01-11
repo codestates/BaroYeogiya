@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios'
+import '../../Css/Login.css'
 
-
-function Login({ handleResponse}) {
+function Login({ handleResponse, handleLoginBtn}) {
+  // handleLoginBtn은 NavBar에서 오고 handleResponse는 app.js에서 온다. userInfo도 app.js에서 넘어 올거다
+  // userInfo는 access_token 실은 정보
   const [LoginId, setLoginId] = useState('')
   const [LoginPw, setLoginPw] = useState('')
 
@@ -14,22 +16,25 @@ function Login({ handleResponse}) {
     setLoginPw(e.target.value)
   }
 
-  const onClickLogin = async () => {
-    console.log('Click?')
+  const onClickLogin = () => {
+    // console.log('Click?')
     axios({
-      url: '54.180.108.24/user/login',
-      method: 'get',
-      data: {
-        user_id: LoginId,
+      url: `${process.env.REACT_APP_SERVER_URL}/user/login`,
+      method: 'GET',
+      params: {
+        id: LoginId,
         pw: LoginPw
       },
       withCredentials: true
     })
     .then(res => {
-      if(res.data.user_id !== LoginId || res.data.pw !== LoginPw ){
+      if(res.params.id !== LoginId || res.params.pw !== LoginPw ){
         alert('Does not match id or password.')
       }
-      handleResponse()
+      handleResponse();
+      console.log(handleResponse())
+      handleLoginBtn();
+      // 왜 여기서 두 함수가 같이 실행이 안될까?? 둘 중 한가지만 넣어야 잘 작동이 된다...이유는?
     })
     .catch((error)=>{
       return error;
@@ -54,7 +59,7 @@ function Login({ handleResponse}) {
         <p>PW</p>
         <input className="input-pw" type="password" onChange={handleLoginPw} />
       </div>
-      <button className="login-bt" onClick={onClickLogin}>로그인</button>
+      <button className="login-bt" onClick={onClickLogin} >로그인</button>
     </div>
   )
 }

@@ -1,6 +1,5 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
-import Login from './Components/Modals/Login';
 import axios from 'axios';
 import MainPage from './Pages/MainPage'
 import NavBar from './Components/NavBar'
@@ -14,11 +13,13 @@ function App() {
 
   const isAuthenticated = () => {
     // 인증에 성공한
-    axios.get('54.180.108.24/user/login')
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/user/login`)
       .then((res) => {
-        setUserInfo(res.data);
+        setUserInfo(res.data.accessToken);
+        // accessToken이 문자열로 들어오는지? 아니면 내가 json화 시켜줘야 하는지?
         setIsLogin(true)
-        // navigate('/')
+        // userNavigate('/Map')
+        // navigate는 지호님이 만들어주면 그때 다시 연결 하는걸로
       })
   };
   const handleResponse = () => {
@@ -28,6 +29,7 @@ function App() {
   useEffect(() => {
     isAuthenticated()
   },[]);
+
 
   return (
     <div className="App">
