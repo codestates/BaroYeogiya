@@ -2,10 +2,10 @@ import './App.css';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import MainPage from './Pages/MainPage'
-import Login from './Components/Modals/Login';
-import NavBar from './Components/NavBar';
-import Map from './Pages/Map';
-import SignUp from './Components/Modals/SignUp';
+import NavBar from './Components/NavBar'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Mypage from './Pages/Mypage'
+import Map from './Pages/Map'
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -30,7 +30,36 @@ function App() {
     isAuthenticated()
   },[]);
 
-  return
+
+  return (
+    <div className="App">
+      <Router>
+        <NavBar />
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              <MainPage />
+            }
+          ></Route> 
+          <Route
+            exact
+            path="/mypage"
+            element={
+              <Mypage />
+            }
+          ></Route>
+          <Route 
+            exact
+            path="/mappage"
+            element={
+              <Map />
+            }></Route>
+        </Routes>
+      </Router>
+      </div>
+  );
 }
 
 export default App;
