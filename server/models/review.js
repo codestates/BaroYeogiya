@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      review.belongsTo(models.user, { foreignKey: 'user_uuid' });
+      review.belongsTo(models.store, { foreignKey: 'store_uuid' });
     }
   };
   review.init({
@@ -27,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'review',
     timestamps: false,
-    freezeTableName: true,
+    freezeTableName: true
   });
   return review;
 };

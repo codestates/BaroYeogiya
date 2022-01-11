@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      user_store.belongsTo(models.user, { foreignKey: 'user_uuid' });
+      user_store.belongsTo(models.store, { foreignKey: 'store_uuid' });
     }
   };
   user_store.init({
@@ -25,6 +27,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'user_store',
+    timestamps: false,
+    freezeTableName: true
   });
   return user_store;
 };
