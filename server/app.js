@@ -1,5 +1,6 @@
 require('dotenv').config();
 
+const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const express = require('express');
 const app = express();
@@ -10,6 +11,13 @@ const HTTPS_PORT = process.env.HTTPS_PORT || 4000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(
+  cors({
+    origin: process.env.CORS_HOST,
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
+  })
+);
 
 app.use('/user', userRouter);
 app.use('/map', mapRouter);
