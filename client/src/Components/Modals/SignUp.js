@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
-axios.defaults.withCredentials = true;
 
-export default function SignUp() {
+
+export default function SignUp({handleSignUpBtn}) {
  const [signUpInfo, setSignUpInfo] = useState({
      id: '',
      pw: '',
@@ -49,6 +49,7 @@ export default function SignUp() {
               else if (result.status === 201) {
                 setUserModal(true);
                 setErrorMessage('가입이 완료되었습니다.')
+                handleSignUpBtn();
                 // 회원가입 성공 => 모달창 종료
               }
             })
