@@ -13,6 +13,8 @@ userRouter.patch('/', userController.common.patch);
 userRouter.delete('/', userController.common.delete);
 // Path: /user/login
 userRouter.get('/login', userController.login.get);
+// Path: /user/pw-confirm
+userRouter.get('/pw-confirm', userController.pwConfirm.get);
 // Path: /user/refresh
 userRouter.get('/refresh', userController.refresh.get);
 

@@ -1,6 +1,4 @@
-const { v4 } = require('uuid');
-const { user } = require('../../models');
-const { generate, hash, refresh } = require('../../utils/token');
+const { refresh } = require('../../utils/token');
 
 /**
  * @path /user/refresh
@@ -11,17 +9,18 @@ module.exports = {
      * @param { refreshToken } req.cookies
      */
     get: (req, res) => {
-        const refreshData = refresh(req.cookies);
+        const tokenData = refresh(req.cookies);
         let message = '';
         let data = {};
 
-        console.log(req.cookies);
-        if (refreshData.accessToken !== undefined) {
+        console.log(tokenData.accessToken);
+        if (tokenData.accessToken !== undefined) {
             message = 'Success!';
-            data = refreshData;
+            data.accessToken = tokenData.accessToken;
             
+            res.cookie('refresh', tokenData.refreshToken, { maxAge: 86400000 });
             res.status(200).send({ message, data });
-        } else if (refreshData) {
+        } else if (tokenData) {
             message = 'The refresh token has expired.';
 
             res.status(400).send({ message });
