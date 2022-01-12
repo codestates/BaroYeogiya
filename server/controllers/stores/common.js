@@ -101,5 +101,48 @@ module.exports = {
 
             res.status(401).send({ message });
         }
-    }
+    },
+    /**
+     * 매장 이미지 수정 API
+     * @param { authorization } req.headers
+     * @param { store_uuid, image } req.body
+     */
+    put: (req, res) => {
+        const hashData = hash(req.headers);
+        const { store_uuid, image } = req.body;
+        let message = '';
+
+        // access token 검사
+        if (hashData.uuid !== undefined) {
+            //매장 이미지 수정
+            store.update({
+                image
+            }, {
+                where: {
+                    uuid: store_uuid
+                }
+            }).then(result => {
+                console.log(result);
+                if (result[0] === 0) {
+                    message = 'Store that does not exist or has already been changed.';
+
+                    res.status(400).send({ message });
+                } else {
+                    message = 'Success!';
+
+                    res.status(200).send({ message });
+                }
+            })
+        // 액세스 토큰 만료 처리
+        } else if (hashData) {
+            message = 'The access token has expired.';
+
+            res.status(401).send({ message });
+        // 액세스 토큰이 잘못됨
+        } else {
+            message = 'Check your access token.';
+
+            res.status(401).send({ message });
+        }
+    },
 }

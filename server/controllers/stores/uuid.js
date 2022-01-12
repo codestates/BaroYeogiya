@@ -35,10 +35,6 @@ module.exports = {
 
                     res.status(200).send({ message });
                 }
-            }).catch(err => {
-                message = 'Review does not exist.';
-
-                res.status(200).send({ message });
             })
         // 액세스 토큰 만료 처리
         } else if (hashData) {
@@ -51,8 +47,6 @@ module.exports = {
 
             res.status(401).send({ message });
         }
-    },
-    put: (req, res) => {
     },
     delete: (req, res) => {
     }

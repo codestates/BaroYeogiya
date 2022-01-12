@@ -38,9 +38,9 @@ reviewRouter.delete('/:uuid', reviewController.uuid.delete);
 // Path: /store
 storeRouter.get('/', storeController.common.get);
 storeRouter.post('/', storeController.common.post);
+storeRouter.put('/', storeController.common.put);
 // Path: /store/:uuid
 storeRouter.post('/:uuid', storeController.uuid.post);
-storeRouter.put('/:uuid', storeController.uuid.put);
 storeRouter.delete('/:uuid', storeController.uuid.delete);
 
 module.exports = { userRouter, mapRouter, reviewRouter, storeRouter };
