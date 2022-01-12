@@ -2,14 +2,18 @@ const { v4 } = require('uuid');
 const { store } = require('../../models');
 const { hash } = require('../../utils/token');
 
+/**
+ * @path /store
+ */
 module.exports = {
     /**
      * 매장 조회 API
      * @method GET
-     * @param { latitude, longitude } req.query
+     * @param { latitude, longitude, offset, limit } req.query
      */
     get: (req, res) => {
         const { latitude, longitude } = req.query;
+        let { offset, limit } = req.query;
         let message = '';
         let data;
 
@@ -18,7 +22,13 @@ module.exports = {
             message = 'Check your parameter.';
     
             res.status(400).send({ message });
+        // 매장 목록 조회
         } else {
+            if (isNaN(offset)) offset = 0;
+            else offset = Number(offset);
+            if (isNaN(limit)) limit = 10;
+            else limit = Number(limit);
+            
             store.findAll({
                 where: {
                     latitude,
@@ -28,7 +38,9 @@ module.exports = {
                     ['uuid', 'store_uuid'],
                     'address',
                     'image'
-                ]
+                ],
+                offset: offset * limit,
+                limit
             }).then(result => {
                 message = 'Success!';
                 data = result.map(el => el.dataValues);
