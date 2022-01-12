@@ -32,7 +32,6 @@ reviewRouter.get('/', reviewController.common.get);
 reviewRouter.patch('/', reviewController.common.patch);
 // Path: /review/:uuid
 reviewRouter.get('/:uuid', reviewController.uuid.get);
-reviewRouter.patch('/:uuid', reviewController.uuid.patch);
 reviewRouter.delete('/:uuid', reviewController.uuid.delete);
 
 // storeRouter
