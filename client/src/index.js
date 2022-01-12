@@ -1,16 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import App from './App';
-// import './index.css';
+import App from './App';
+import './index.css';
 // import Map from './Pages/Map'
-import Login from './Components/Modals/Login';
-import NavBar from './Components/NavBar'
+// import Login from './Components/Modals/Login';
+// import NavBar from './Components/NavBar'
 import MainPage from './Pages/MainPage'
-import SignUp from './Components/Modals/SignUp'
+// import SignUp from './Components/Modals/SignUp'
 
 ReactDOM.render(
   <React.StrictMode>
-    <NavBar />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
