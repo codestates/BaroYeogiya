@@ -1,9 +1,33 @@
 .nav-box{
     width: 100vw;
-    height: 100vh;
+    height: 10vh;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: solid 1px rgba(126, 124, 124, 0.747);
+    position: fixed;
+    /* background-color: aquamarine; */
 }
 .bt{
     height: 30px;
+}
+
+.logo-img-box{
+    width: 5%;
+    position: fixed;
+    /* background-color: brown; */
+}
+
+.nav-menue-box{
+    width: 98%;
+    display: flex;
+    justify-content: flex-end;
+    /* background-color: aquamarine; */
+}
+
+.menue-box{
+    width: 30%;
+    display: flex;
+    justify-content: space-around;
+    /* background-color: blueviolet; */
 }

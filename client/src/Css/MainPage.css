@@ -2,3 +2,27 @@
     width: 100vw;
     height: 100vh;
 }
+
+.main-intro-box{
+    display: flex;
+    flex-direction: column;
+}
+
+.main-first-intro{
+    width: 100vW;
+    height: 25vh;
+    background-color: bisque;
+    margin-top: 10vh;
+}
+
+.main-second-intro{
+    width: 100vW;
+    height: 25vh;
+    background-color: blue;
+}
+
+.main-third-intro{
+    width: 100vW;
+    height: 25vh;
+    background-color: blueviolet;
+}
