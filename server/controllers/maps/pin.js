@@ -23,7 +23,7 @@ module.exports = {
         like === 'true' ? like = true : like = false;
 
         // access token 확인
-        if (like === undefined || (like !== undefined && hashData.uuid !== undefined)) {
+        if (like === false || (like === true && hashData.uuid !== undefined)) {
             // parameter 유무 확인
             if (isNaN(latitude) || isNaN(longitude)) {
                 message = 'Check your parameter.';
