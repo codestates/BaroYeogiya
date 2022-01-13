@@ -14,13 +14,13 @@ module.exports = {
      */
     get: (req, res) => {
         const hashData = hash(req.headers);
-        const { like } = req.query;
-        let { latitude, longitude } = req.query;
+        let { latitude, longitude, like } = req.query;
         let message = '';
         let data = [];
 
         latitude = Number(latitude);
         longitude = Number(longitude);
+        like === 'true' ? like = true : like = false;
 
         // access token 확인
         if (like === undefined || (like !== undefined && hashData.uuid !== undefined)) {
