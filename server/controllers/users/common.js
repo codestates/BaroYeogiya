@@ -35,6 +35,7 @@ module.exports = {
                     created_at: new Date()
                 },
             }).then(result => {
+                // 회원가입 성공
                 if (result[1]) {
                     message = 'Success!';
                     data.user_uuid = user_uuid;
@@ -42,6 +43,7 @@ module.exports = {
                     data.name = name;
 
                     res.status(201).send({ message, data });
+                // 회원가입 실패
                 } else {
                     message = 'Check your id.';
 
@@ -60,7 +62,7 @@ module.exports = {
         let message = '';
         let data = {};
 
-        // 회원정보 조회
+        // access token 체크
         if (hashData.uuid !== undefined) {
             const { uuid, user_id } = hashData;
             
@@ -70,10 +72,12 @@ module.exports = {
                     user_id
                 }
             }).then(result => {
+                // 조회 결과가 없음
                 if (result === null) {
                     message = 'It\'s a user that doesn\'t exist.';
 
                     res.status(400).send({ message });
+                // 조회 성공
                 } else {
                     message = 'Success!';
                     data.user_uuid = uuid;
@@ -107,7 +111,7 @@ module.exports = {
         let message = '';
         let data = {};
 
-        // 회원정보 조회
+        // access token 체크
         if (hashData.uuid !== undefined) {
             // parameter 유무 확인
             if (pw === undefined || name === undefined) {
@@ -126,10 +130,12 @@ module.exports = {
                         user_id
                     }
                 }).then(result => {
-                    if (result[1] === 0) {
+                    // 수정 결과가 존재하지 않음
+                    if (result[0] === 0) {
                         message = 'It\'s a user that doesn\'t exist.';
 
                         res.status(400).send({ message });
+                    // 수정 완료
                     } else {
                         const tokenData = generate(uuid, user_id);
                         message = 'Success!';
@@ -160,7 +166,7 @@ module.exports = {
         const hashData = hash(req.headers);
         let message = '';
 
-        // 회원정보 조회
+        // access token 체크
         if (hashData.uuid !== undefined) {
             const { uuid, user_id } = hashData;
 
@@ -170,10 +176,12 @@ module.exports = {
                     user_id
                 }
             }).then(result => {
+                // 삭제 실패
                 if (result === 0) {
                     message = 'User does not exist.';
 
                     res.status(400).send({ message });
+                // 삭제 완료
                 } else {
                     message = 'Success!';
 

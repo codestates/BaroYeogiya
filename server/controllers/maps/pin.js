@@ -31,7 +31,6 @@ module.exports = {
 
                 // like parameter가 true일 때만 테이블 조인
                 if (like) {
-                    console.log("weewrtewfwefg");
                     include = [
                         {
                             model: user_store,

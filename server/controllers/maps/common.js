@@ -1,6 +1,5 @@
-const { v4 } = require('uuid');
 const { user } = require('../../models');
-const { generate, hash, refresh } = require('../../utils/token');
+const { hash } = require('../../utils/token');
 
 /**
  * @path /map
