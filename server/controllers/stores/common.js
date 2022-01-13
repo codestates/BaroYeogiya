@@ -122,7 +122,6 @@ module.exports = {
                     uuid: store_uuid
                 }
             }).then(result => {
-                console.log(result);
                 if (result[0] === 0) {
                     message = 'Store that does not exist or has already been changed.';
 

@@ -121,8 +121,6 @@ module.exports = {
         let message = '';
         let data = {};
 
-        console.log(hashData);
-
         // access token 조회
         if (hashData.uuid !== undefined) {
             // parameter 유무 확인
@@ -158,7 +156,6 @@ module.exports = {
                                 uuid: review_uuid
                             }
                         }).then(result2 => {
-                            console.log();
                             if (result2[1] === 0) {
                                 message = 'Check your parameter.';
         
@@ -172,8 +169,6 @@ module.exports = {
 
                                 res.status(200).send({ message, data });
                             }
-                        }).catch(err => {
-                            console.log(err);
                         })
                     }
                 })
