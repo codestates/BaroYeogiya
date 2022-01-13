@@ -156,7 +156,7 @@ module.exports = {
                                 uuid: review_uuid
                             }
                         }).then(result2 => {
-                            if (result2[1] === 0) {
+                            if (result2[0] === 0) {
                                 message = 'Check your parameter.';
         
                                 res.status(400).send({ message });
