@@ -16,7 +16,12 @@ function NavBar({ handleResponse, handleIsLogin }) {
   const handleSignUpBtn = (bool) => {
     setSignUpModalBtn(bool);
   };
-
+  const handleCloseSignUp = () => {
+    setSignUpModalBtn(false);
+  };
+  const handleCloseLogin = () => {
+    setLoginModalBtn(false);
+  };
   const getResponse = (res) => {
     handleResponse(res);
   };
@@ -32,9 +37,15 @@ function NavBar({ handleResponse, handleIsLogin }) {
           handleLoginBtn={handleLoginBtn}
           getResponse={getResponse}
           getLoging={getLoging}
+          handleCloseLogin={handleCloseLogin}
         />
       ) : null}
-      {signUpModalBtn ? <SignUp handleSignUpBtn={handleSignUpBtn} /> : null}
+      {signUpModalBtn ? (
+        <SignUp
+          handleSignUpBtn={handleSignUpBtn}
+          handleCloseSignUp={handleCloseSignUp}
+        />
+      ) : null}
       {/* 모달창을 페이지 위에 나타나고 버튼을 클릭 시 상태를 변경 함으로써 원래 상태로 돌아가게 한다. */}
       <div className="nav-box">
         <div onClick={() => navigate('/')} className="logo-img-box">
