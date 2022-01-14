@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router';
 
 axios.defaults.withCredentials = true;
 
-export default function WithDrawal({ userInfo }) {
+export default function WithDrawal({ userInfo, handleIsLogin }) {
   const [checkPassword, setCheckPassword] = useState({
     pw: '',
   });
@@ -47,6 +47,7 @@ export default function WithDrawal({ userInfo }) {
                 if (result.status === 200) {
                   setErrorMessage('회원탈퇴가 완료되었습니다.');
                   // alert창 띄우고(Confrim창), 확인 누르면 메인페이지로 쫓아내기
+                  handleIsLogin(false);
                   navigate('/');
                   // 여기서 isLogin state를 false로 바꾸기
                 }
