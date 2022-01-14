@@ -10,28 +10,31 @@ module.exports = {
      * 핀 조회 API
      * @method GET
      * @param { authorization } req.headers
-     * @param { start_latitude, end_latitude, start_longitude, end_longitude, like } req.body
+     * @param { latitude, longitude, like } req.query
      */
     get: (req, res) => {
         const hashData = hash(req.headers);
-        const { start_latitude, end_latitude, start_longitude, end_longitude, like } = req.body;
+        let { latitude, longitude, like } = req.query;
         let message = '';
         let data = [];
 
+        latitude = Number(latitude);
+        longitude = Number(longitude);
+        like === 'true' ? like = true : like = false;
+
         // access token 확인
-        if (like === undefined || (like !== undefined && hashData.uuid !== undefined)) {
+        if (like === false || (like === true && hashData.uuid !== undefined)) {
             // parameter 유무 확인
-            if (start_latitude === undefined || end_latitude === undefined || start_longitude === undefined || end_longitude === undefined) {
+            if (isNaN(latitude) || isNaN(longitude)) {
                 message = 'Check your parameter.';
     
                 res.status(400).send({ message });
             } else {
-                const { uuid, user_id } = hashData;
+                const { uuid } = hashData;
                 let include;
 
                 // like parameter가 true일 때만 테이블 조인
                 if (like) {
-                    console.log("weewrtewfwefg");
                     include = [
                         {
                             model: user_store,
@@ -48,10 +51,10 @@ module.exports = {
                     include,
                     where: {
                         latitude: {
-                            [Op.between]: [start_latitude, end_latitude]
+                            [Op.between]: [latitude - 0.5, latitude + 0.5]
                         },
                         longitude: {
-                            [Op.between]: [start_longitude, end_longitude]
+                            [Op.between]: [longitude - 0.5, longitude + 0.5]
                         }
                     },
                     attributes: [

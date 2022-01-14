@@ -32,12 +32,13 @@ reviewRouter.get('/', reviewController.common.get);
 reviewRouter.patch('/', reviewController.common.patch);
 // Path: /review/:uuid
 reviewRouter.get('/:uuid', reviewController.uuid.get);
-reviewRouter.patch('/:uuid', reviewController.uuid.patch);
 reviewRouter.delete('/:uuid', reviewController.uuid.delete);
 
 // storeRouter
 // Path: /store
 storeRouter.get('/', storeController.common.get);
+storeRouter.post('/', storeController.common.post);
+storeRouter.put('/', storeController.common.put);
 // Path: /store/:uuid
 storeRouter.post('/:uuid', storeController.uuid.post);
 storeRouter.delete('/:uuid', storeController.uuid.delete);

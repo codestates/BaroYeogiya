@@ -13,7 +13,6 @@ module.exports = {
         let message = '';
         let data = {};
 
-        console.log(tokenData.accessToken);
         if (tokenData.accessToken !== undefined) {
             message = 'Success!';
             data.accessToken = tokenData.accessToken;

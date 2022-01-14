@@ -1,96 +1,139 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState } from 'react';
+import axios from 'axios';
+import '../../Css/ModifyUser.css';
 
-function ModifyUser ({user}) { // 모달창 닫히는 함수 넘어와야 하고 user는 회원정보를 내려 받아와야한다.
-  const [modifyName, setModifyName] = useState(null);
-  // const [modifyId, setModifyId] = useState(null);
-  const [modifyPw, setModifyPw] = useState('')
-  const [confirm, setConfirm] = useState(false)
-
-  const handleModifyName = (event) => {
-    const name = event.target.value;
-    setModifyName(name)
+export default function MoidfyUser({ userInfo }) {
+  const [modifyInfo, setModifyInfo] = useState({
+    name: '',
+    currentpw: '',
+    modifiedpw: '',
+    modifiedpwconfirm: '',
+  });
+  const token = userInfo.accessToken.data.accessToken;
+  const [errorMessage, setErrorMessage] = useState('');
+  console.log(token);
+  const handleInputValue = (key) => (e) => {
+    setModifyInfo({ ...modifyInfo, [key]: e.target.value });
   };
 
-  // const handleModifyId = (event) => {
-  //   const id = event.target.value;
-  //   setModifyId(id);
-  // };
-
-  const handelModifyPw = (event) => {
-    const pw = event.target.value
-    setModifyPw(pw)
-  }
-
-  const handleConfirm = (event) => {
-    const password = event.target.value
-    if(modifyPw === password) setConfirm(true);
-    else{
-      setConfirm(false)
-    }
-  }
-
-  const changeUserInfo = () => {
-    if(confirm){
-      const newUserInfo = {
-        name: modifyName === ''? user.name : modifyName,
-        pw: modifyPw
-      };
+  const handleModify = () => {
+    const { name, currentpw, modifiedpw, modifiedpwconfirm } = modifyInfo;
+    if ((!name || !currentpw || !modifiedpw, !modifiedpwconfirm)) {
+      setErrorMessage(
+        '변경할 닉네임, 현재 비밀번호, 변경할 비밀번호, 비밀번호 확인을 모두 입력해야합니다.'
+      );
+    } else if (name.length > 10) {
+      setErrorMessage('변경할 닉네임은 10글자 이내로 입력해야합니다.');
+    } else if (modifiedpw.length < 8 || modifiedpwconfirm.length < 8) {
+      setErrorMessage('변경할 비밀번호는 8글자 이상 입력해야합니다.');
+    } else if (modifiedpw !== modifiedpwconfirm) {
+      setErrorMessage('입력하신 비밀번호와 비밀번호 확인이 일치하지 않습니다.');
+    } else {
       axios({
-        url: `${process.env.REACT_APP_SERVER_URL}/user`,
-        method: 'patch',
-        data: newUserInfo,
-        withCredentials: true
+        method: 'GET',
+        url: `${process.env.REACT_APP_SERVER_URL}/user/pw-confirm`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          pw: currentpw,
+        },
       })
-      .then((res)=>{
-        console.log('어때?', res.data)
-        // 모달창이 닫히고 회원정보창이 보이는 함수 구현, 마이페이지(UserInfo.js에서 구현해서 넘겨준다)
-        // 마이페이지(회원정보) 만들어지면 함수 만들어서 넘겨주는걸로
-      })
-      .catch((err)=>{
-        console.log('무슨 에러?', err)
-        alert('옳지 않은 정보가 있습니다. 확인 후 시도 해주세요');
-      })
+        .then((result) => {
+          if (result.status === 200) {
+            //이 경우에만 회원정보 수정
+            console.log('Success');
+            axios({
+              method: 'PATCH',
+              url: `${process.env.REACT_APP_SERVER_URL}/user`,
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+              data: {
+                pw: modifiedpw,
+                name,
+              },
+            })
+              .then((result) => {
+                if (result.status === 200) {
+                  setErrorMessage('회원정보가 수정되었습니다.');
+                }
+              })
+              .catch((err) => {
+                if (err.response.status === 400) {
+                  setErrorMessage('존재하지 않는 유저입니다.');
+                } else {
+                  setErrorMessage('유효하지 않은 접근입니다.');
+                }
+              });
+          }
+        })
+        .catch((err) => {
+          if (err.response.status === 400) {
+            setErrorMessage('현재 비밀번호를 다시 입력해주세요.');
+          } else if (err.response.status === 401) {
+            setErrorMessage('유효하지 않은 접근입니다.');
+          }
+        });
     }
   };
-
   return (
-    <div className="modify-info-box">
-      <div className="modify-input-box">
-        <div className="client-info">
-          <p>이름</p>
-        </div>
-        <input className="input-box" name="text-name" size="30" type="text"
-        onChange={handleModifyName}
-        ></input>
+    <>
+      <div className="modifyuser-box">
+        <center>
+          <h2 id="signup-title">회원정보 수정</h2>
+          <form onSubmit={(e) => e.preventDefault()}>
+            <div>
+              변경할 닉네임
+              <div className="input-field">
+                <input
+                  type="text"
+                  onChange={handleInputValue('name')}
+                  className="input-width"
+                  placeholder="사용하실 닉네임을 입력해주세요."
+                />
+              </div>
+            </div>
+            <div>
+              현재 비밀번호
+              <div className="password-field">
+                <input
+                  type="password"
+                  onChange={handleInputValue('currentpw')}
+                  className="input-width"
+                  placeholder="비밀번호"
+                />
+              </div>
+            </div>
+            <div>
+              변경할 비밀번호
+              <div className="password-field">
+                <input
+                  type="password"
+                  onChange={handleInputValue('modifiedpw')}
+                  className="input-width"
+                  placeholder="비밀번호 확인"
+                />
+              </div>
+            </div>
+            <div>
+              비밀번호 확인
+              <div className="password-field">
+                <input
+                  type="password"
+                  onChange={handleInputValue('modifiedpwconfirm')}
+                  className="input-width"
+                  placeholder="비밀번호 확인"
+                />
+              </div>
+            </div>
+            <button className="btn" type="submit" onClick={handleModify}>
+              회원정보 수정
+            </button>
+            <div className="alert-box">{errorMessage}</div>
+          </form>
+        </center>
       </div>
-      {/* <div className="modify-input-box">
-        <div className="client-info">
-          <p>id</p>
-        </div>
-        <input className="input-box" name="text-name" size="30" type="text"
-        onChange={handleModifyId}
-        ></input>
-      </div> */}
-      <div className="modify-input-box">
-        <div className="client-info">
-          <p>비밀번호</p>
-        </div>
-        <input className="input-box" name="text-name" size="30" type="text"
-        onChange={handelModifyPw}
-        ></input>
-      </div>
-      <div className="modify-input-box">
-        <div className="client-info">
-          <p>비밀번호 확인</p>
-        </div>
-        <input className="input-box" name="text-name" size="30" type="text"
-        onChange={handleConfirm}
-        ></input>
-      </div>
-      <button className='user-info-modify-bt' onClick={ () => { changeUserInfo(); } }></button>
-    </div>
-  )
+    </>
+  );
 }
-
-export default ModifyUser;
