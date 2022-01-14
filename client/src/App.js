@@ -12,7 +12,21 @@ function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
   // console.log(isLogin)
+  const [withDrawalModal, setWithDrawlalModal] = useState(false);
+  const [modifyModal, setModifyModal] = useState(false);
+  const handleWithDrawalModal = () => {
+    setWithDrawlalModal(true);
+    setModifyModal(false);
+  };
 
+  const handleModifyModal = () => {
+    setModifyModal(true);
+    setWithDrawlalModal(false);
+  };
+  const handleInitializeMypage = () => {
+    setModifyModal(false);
+    setWithDrawlalModal(false);
+  };
   const handleResponse = (res) => {
     // accessToken을 받아 와서 state에 저장한다.
     const userInfo = {
@@ -38,6 +52,7 @@ function App() {
           <UserNavBar
             handleResponse={handleResponse}
             handleIsLogin={handleIsLogin}
+            handleInitializeMypage={handleInitializeMypage}
           />
         ) : (
           <NavBar
@@ -55,7 +70,16 @@ function App() {
           <Route
             exact
             path="/mypage"
-            element={<Mypage userInfo={userInfo} />}
+            element={
+              <Mypage
+                userInfo={userInfo}
+                handleWithDrawalModal={handleWithDrawalModal}
+                handleModifyModal={handleModifyModal}
+                withDrawalModal={withDrawalModal}
+                modifyModal={modifyModal}
+                handleIsLogin={handleIsLogin}
+              />
+            }
           ></Route>
           <Route exact path="/mappage" element={<Map />}></Route>
         </Routes>
