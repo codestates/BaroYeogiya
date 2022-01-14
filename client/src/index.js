@@ -2,11 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
-// import Map from './Pages/Map'
+import Map from './Pages/Map'
 // import Login from './Components/Modals/Login';
 // import NavBar from './Components/NavBar'
-import MainPage from './Pages/MainPage'
+// import MainPage from './Pages/MainPage'
 // import SignUp from './Components/Modals/SignUp'
+import StoreListSiderBar from './Components/Modals/StoreListSiderBar'
 
 ReactDOM.render(
   <React.StrictMode>

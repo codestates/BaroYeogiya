@@ -57,7 +57,13 @@ function App() {
             path="/mypage"
             element={<Mypage userInfo={userInfo} />}
           ></Route>
-          <Route exact path="/mappage" element={<Map />}></Route>
+          <Route 
+            exact
+            path="/mappage"
+            element={
+              <Map userInfo={userInfo} />
+            }
+          ></Route>
         </Routes>
       </Router>
     </div>
