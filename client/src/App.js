@@ -53,7 +53,7 @@ function App() {
             exact
             path="/mappage"
             element={
-              <Map />
+              <Map userInfo={userInfo} />
             }></Route>
         </Routes>
       </Router>
