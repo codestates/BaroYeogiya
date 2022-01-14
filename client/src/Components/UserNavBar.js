@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import '../Css/NavBar.css';
 import { useNavigate } from 'react-router-dom';
-function UserNavBar({ handleResponse, handleIsLogin }) {
+
+function UserNavBar({ handleResponse, handleIsLogin, handleInitializeMypage }) {
   const onLogout = () => {
     // props로 받은 함수를 실행하여 상태를 변경 시킨다.
     handleResponse({
@@ -24,7 +25,9 @@ function UserNavBar({ handleResponse, handleIsLogin }) {
             <button className="bt">지도</button>
           </Link>
           <Link to="/mypage">
-            <button className="bt">My Page</button>
+            <button onClick={handleInitializeMypage} className="bt">
+              My Page
+            </button>
           </Link>
           <button className="bt" onClick={() => onLogout()}>
             Logout
