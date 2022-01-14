@@ -1,4 +1,4 @@
-.login-entire-box {
+.signup-entire-box {
   width: 100vw;
   height: 100vh;
   background-color: rgba(37, 37, 37, 0.7);
@@ -9,13 +9,13 @@
   align-items: center;
 }
 
-.login-box {
+.signup-box {
   width: 300px;
   height: 500px;
   background-color: aquamarine;
   top: 100%;
 }
 
-.close-login {
+.close-signup {
   margin-left: 277px;
 }
