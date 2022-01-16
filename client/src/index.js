@@ -8,6 +8,7 @@ import Map from './Pages/Map'
 // import MainPage from './Pages/MainPage'
 // import SignUp from './Components/Modals/SignUp'
 import StoreListSiderBar from './Components/Modals/StoreListSiderBar'
+import SelectedStore from './Components/Modals/SelectedStore'
 
 ReactDOM.render(
   <React.StrictMode>

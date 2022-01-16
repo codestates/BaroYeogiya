@@ -14,17 +14,16 @@ const { kakao } = window;
 
 const Map = ({ userInfo }) => {
 
-  const [ currentMaker, setCurrentMaker ] = useState()
+  const [ currentMaker, setCurrentMaker ] = useState(null)
   // const [like, setLike] = useState(true)
-  const [isClick, setIsClick] =useState(false)
-  const [mapLatitude, setMapLatitude] = useState()
-  const [mapLongitude, setMapLongitude] = useState()
-    console.log('클릭?', isClick)
-    // console.log('mapLtitude', mapLatitude)
-    console.log('정보?', currentMaker)
-  useEffect(() => {
+  const [ isClick, setIsClick ] = useState(false)
+  const [ isAuth, setIsAuth ] = useState(null)
+  // const [mapLatitude, setMapLatitude] = useState()
+  // const [mapLongitude, setMapLongitude] = useState()
+  
+  useEffect( async () => {
     // app.js에서 props로 내려준 값이다.
-    // const token = userInfo.accessToken.data.accessToken; 
+    const token = userInfo.accessToken.data.accessToken;
 
     const container = document.getElementById('map');
     const options = {
@@ -62,29 +61,25 @@ const Map = ({ userInfo }) => {
     
     
     // like가 true일땐 핀조회 데이터가 빈배열이다. 위치도 false일때와 똑같은데 왜지?
-    axios({ // 핀조회 axios 요청
+    await axios({ // 핀조회 axios 요청
       url: `${process.env.REACT_APP_SERVER_URL}/map/pin`,
       method : 'GET',
       params : {
         latitude: 37.57961509140872,
         longitude: 126.97704325823415,
-        like : false
+        like : true
       },
-      // headers: {
-      //   Authorization: `Bearer ${token}`
-      // },
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
       withCredentials : true
     })
     .then((res) => {
-      // console.log(res)
       if(res.status === 200){ // 요청을 잘 받으면 화면상에 중심 좌표 값으로 지도를 나타낸다. 또한
-        console.log('이건?', res)
-        
 
         const positions = res.data.data
 
         for( let i = 0; i < positions.length; i++ ){
-          console.log('이건?', positions.length)
           const markerPosition = new kakao.maps.LatLng(positions[i].latitude, positions[i].longitude );
           const marker = new kakao.maps.Marker({
             position: markerPosition, // 마커를 표시할 위치
@@ -97,8 +92,7 @@ const Map = ({ userInfo }) => {
             setCurrentMaker(res.data.data[i]);
             // 가게 리스트 모달창
             setIsClick(true);
-            
-            // console.log('정보?', currentMaker)
+            setIsAuth(token)
           });
 
         }
@@ -122,10 +116,7 @@ const Map = ({ userInfo }) => {
   return (
     <>
       <div className="with-map-siderbar">
-        {/* <button>로고</button>
-        <input className="location-search" type="text" placeholder="검색:" size="30"></input>
-        <button>마이페이지</button> */}
-        {isClick ? <StoreList currentMaker={currentMaker} /> : <StoreListSiderBar /> }
+        {isClick ? <StoreList currentMaker={currentMaker} isAuth={isAuth} /> : <StoreListSiderBar /> }
         <div id="map"></div>
       </div>
     </>
