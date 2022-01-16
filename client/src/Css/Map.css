@@ -1,6 +1,6 @@
 #map{
   position: fixed;
-  left: 300px;
+  left: 500px;
   z-index: 1; /*쓸모없는듯*/
   width: 80%;
   height: 100vh;
