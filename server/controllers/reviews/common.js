@@ -36,19 +36,32 @@ module.exports = {
                     content,
                     image,
                     created_at: new Date()
-                }, {
-                    attributes: [
-                        ['uuid', 'review_uuid'],
-                        'store_uuid',
-                        'content',
-                        'image'
-                    ]
                 }).then(result => {
                     if (result.dataValues !== null) {
-                        message = 'Success!';
-                        data = result.dataValues;
-                        
-                        res.status(201).send({ message, data });
+                        review.findOne({
+                            where: {
+                                uuid: result.dataValues.uuid
+                            },
+                            attributes: [
+                                ['uuid', 'review_uuid'],
+                                'store_uuid',
+                                'content',
+                                'image',
+                            ]
+                        }).then(result => {
+                            // 조회 결과가 없음
+                            if (result === null) {
+                                message = 'Check your parameter.';
+            
+                                res.status(400).send({ message });
+                            // 조회 성공
+                            } else {
+                                message = 'Success!';
+                                data = result.dataValues;
+    
+                                res.status(201).send({ message, data });
+                            }
+                        });
                     } else {
                         message = 'Check your parameter.';
             

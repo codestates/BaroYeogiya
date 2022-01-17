@@ -52,18 +52,18 @@ module.exports = {
      * 매장 등록 API
      * @method POST
      * @param { authorization } req.headers
-     * @param { name, latitude, longitude, image } req.body
+     * @param { address, latitude, longitude, image } req.body
      */
     post: (req, res) => {
         const hashData = hash(req.headers);
-        const { name, latitude, longitude, image } = req.body;
+        const { address, latitude, longitude, image } = req.body;
         let message = '';
         let data = {};
 
         // access token 조회
         if (hashData.uuid !== undefined) {
             // parameter 유무 확인
-            if (name === undefined || latitude === undefined || longitude === undefined) {
+            if (address === undefined || latitude === undefined || longitude === undefined) {
                 message = 'Check your parameter.';
     
                 res.status(400).send({ message });
@@ -71,7 +71,7 @@ module.exports = {
             } else {
                 store.create({
                     uuid: v4(),
-                    address: name,
+                    address,
                     latitude,
                     longitude,
                     image
@@ -79,8 +79,13 @@ module.exports = {
                     if (result.dataValues !== null) {
                         message = 'Success!';
                         data.store_uuid = result.dataValues.uuid;
-                        data.name = result.dataValues.address;
-                        data.image = result.dataValues.image;
+                        data.address = result.dataValues.address;
+
+                        if (result.dataValues.image === undefined) {
+                            data.image = null;
+                        } else {
+                            data.image = result.dataValues.image;
+                        }
                         
                         res.status(201).send({ message, data });
                     } else {
