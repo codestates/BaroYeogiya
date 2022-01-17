@@ -113,6 +113,13 @@ module.exports = {
                 where: {
                     store_uuid
                 }, 
+                attributes: [
+                    ['uuid', 'review_uuid'],
+                    'user_uuid',
+                    'store_uuid',
+                    'content',
+                    'image',
+                ],
                 offset: offset * limit,
                 limit
             }).then(result => {
