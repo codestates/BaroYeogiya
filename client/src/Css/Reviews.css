@@ -1,5 +1,14 @@
+
+
 #review-box{
   width: 80%;
   height: 20px;
   border: solid 1px #000;
+  display: flex;
+  background-color: chartreuse;
+}
+
+#delete-review{
+  width: 10%;
+  background-color: chocolate;
 }

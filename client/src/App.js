@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Mypage from './Pages/Mypage';
 import Map from './Pages/Map';
 import UserNavBar from './Components/UserNavBar';
+import GuestMap from './Pages/GuestMap'
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -85,7 +86,11 @@ function App() {
             exact
             path="/mappage"
             element={
-              <Map userInfo={userInfo} />
+              isLogin ? (
+                <Map userInfo={userInfo} />
+              ) : (
+                <GuestMap isLogin={isLogin} />
+              )
             }
           ></Route>
         </Routes>
