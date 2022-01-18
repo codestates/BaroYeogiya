@@ -10,6 +10,8 @@ import Map from './Pages/Map'
 import StoreListSiderBar from './Components/Modals/StoreListSiderBar'
 import SelectedStore from './Components/Modals/SelectedStore'
 import GuestSelectedStore from './Components/Modals/GuestSelectedStore'
+import Mypage from './Pages/Mypage'
+import StoreCard from './Components/StoreCard'
 
 ReactDOM.render(
   <React.StrictMode>

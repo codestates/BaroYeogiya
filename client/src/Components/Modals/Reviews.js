@@ -11,9 +11,6 @@ function Reviews({ marker, userInfo }) {
     await axios({
       url: `${process.env.REACT_APP_SERVER_URL}/review/${reviewId}`,
       method : 'delete',
-      path : {
-        review_uuid : reviewId
-      },
       headers: {
         Authorization: `Bearer ${token}`
       },
