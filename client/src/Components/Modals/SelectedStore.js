@@ -80,9 +80,9 @@ function SelectedStore({ storeId, userInfo }) { // storeList에서 넘어옴
   
   const handleMyPick = async () => { // 마이페이지 찜 목록으로 정보를 전달(찜하기)
     await axios({
-      url: `${process.env.REACT_APP_SERVER_URL}/store/:store-uuid`,
+      url: `${process.env.REACT_APP_SERVER_URL}/store/${storeId}`,
       method: 'POST',
-      params: {
+      path: {
         store_uuid: storeId
       },
       headers: {
