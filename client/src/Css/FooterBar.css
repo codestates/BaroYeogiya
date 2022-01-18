@@ -1,0 +1,25 @@
+.footer-box {
+  position: absolute;
+  display: inline-block;
+  display: flex;
+  bottom: 0;
+}
+.aboutus-box {
+  margin: 5px;
+  padding-left: 570px;
+}
+.contact-box {
+  margin: 5px;
+  padding-left: 70px;
+}
+.aboutus-title {
+  font-size: large;
+}
+
+.contact-title {
+  font-size: large;
+}
+a {
+  text-decoration-line: none;
+  color: black;
+}

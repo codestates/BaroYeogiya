@@ -3,6 +3,7 @@ import WithDrawal from '../Components/Modals/WithDrawal';
 import ModifyUser from '../Components/Modals/ModifyUser';
 import UserInfo from '../Components/UserInfo';
 import CartList from '../Components/CartList';
+import FooterBar from '../Components/FooterBar';
 
 // 마이페이지 컴포넌트
 export default function Mypage({

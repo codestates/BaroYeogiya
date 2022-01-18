@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import '../../Css/WithDrawal.css';
 import { useNavigate } from 'react-router';
-
+import FooterBar from '../FooterBar';
 axios.defaults.withCredentials = true;
 
 export default function WithDrawal({ userInfo, handleIsLogin }) {
@@ -92,6 +92,7 @@ export default function WithDrawal({ userInfo, handleIsLogin }) {
           <div className="alert-box">{errorMessage}</div>
         </form>
       </center>
+      <FooterBar />
     </div>
   );
 }
