@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import ModifyUser from '../Components/Modals/ModifyUser';
 import '../Css/UserInfo.css';
 import axios from 'axios';
+import FooterBar from './FooterBar';
 export default function UserInfo({
   userInfo,
   handleWithDrawalModal,
@@ -73,6 +74,7 @@ export default function UserInfo({
         </button>
         <div className="alert-box">{errorMessage}</div>
       </center>
+      <FooterBar />
     </div>
   );
 }

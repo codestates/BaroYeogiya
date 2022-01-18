@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../../Css/ModifyUser.css';
-
+import FooterBar from '../FooterBar';
 export default function MoidfyUser({ userInfo }) {
   const [modifyInfo, setModifyInfo] = useState({
     name: '',
@@ -133,6 +133,7 @@ export default function MoidfyUser({ userInfo }) {
             <div className="alert-box">{errorMessage}</div>
           </form>
         </center>
+        <FooterBar />
       </div>
     </>
   );
