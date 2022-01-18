@@ -82,9 +82,6 @@ function SelectedStore({ storeId, userInfo }) { // storeList에서 넘어옴
     await axios({
       url: `${process.env.REACT_APP_SERVER_URL}/store/${storeId}`,
       method: 'POST',
-      path: {
-        store_uuid: storeId
-      },
       headers: {
         Authorization: `Bearer ${token}`
       },
