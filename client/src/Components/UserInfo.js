@@ -9,6 +9,8 @@ export default function UserInfo({
   userInfo,
   handleWithDrawalModal,
   handleModifyModal,
+  handleResponse,
+  handleIsLogin,
 }) {
   const [userId, setUserId] = useState('');
   const [userName, setUserName] = useState('');
@@ -37,8 +39,24 @@ export default function UserInfo({
       .catch((err) => {
         if (err.response.status === 400) {
           setErrorMessage('유효하지 않은 사용자입니다.');
-        } else {
-          setErrorMessage('잘못된 접근입니다.');
+        } else if (err.response.status === 401) {
+          // 토큰 만료 시 refresh 토큰 재발급 요청
+          axios({
+            method: 'GET',
+            url: `${process.env.REACT_APP_SERVER_URL}/user/refresh`,
+          })
+            .then((result) => {
+              // 토큰 갱신에 성공할 경우
+              if (result.status === 200) {
+                handleResponse(result);
+              }
+            })
+            .catch((err) => {
+              if (err.response.status === 400) {
+                // 유효한 접근이 아니므로 로그아웃 처리
+                handleIsLogin(false);
+              }
+            });
         }
       });
   };

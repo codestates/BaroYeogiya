@@ -7,26 +7,35 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Mypage from './Pages/Mypage';
 import Map from './Pages/Map';
 import UserNavBar from './Components/UserNavBar';
-import GuestMap from './Pages/GuestMap'
+import GuestMap from './Pages/GuestMap';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
   // console.log(isLogin)
   const [withDrawalModal, setWithDrawlalModal] = useState(false);
+  const [cartlistModal, setCartlistModal] = useState(false);
   const [modifyModal, setModifyModal] = useState(false);
+
   const handleWithDrawalModal = () => {
     setWithDrawlalModal(true);
     setModifyModal(false);
+    setCartlistModal(false);
   };
-
+  const handleCartlistModal = () => {
+    setCartlistModal(true);
+    setWithDrawlalModal(false);
+    setModifyModal(false);
+  };
   const handleModifyModal = () => {
     setModifyModal(true);
     setWithDrawlalModal(false);
+    setCartlistModal(false);
   };
   const handleInitializeMypage = () => {
     setModifyModal(false);
     setWithDrawlalModal(false);
+    setCartlistModal(false);
   };
   const handleResponse = (res) => {
     // accessToken을 받아 와서 state에 저장한다.
@@ -76,13 +85,16 @@ function App() {
                 userInfo={userInfo}
                 handleWithDrawalModal={handleWithDrawalModal}
                 handleModifyModal={handleModifyModal}
+                handleCartlistModal={handleCartlistModal}
                 withDrawalModal={withDrawalModal}
                 modifyModal={modifyModal}
+                cartlistModal={cartlistModal}
                 handleIsLogin={handleIsLogin}
+                handleResponse={handleResponse}
               />
             }
           ></Route>
-          <Route 
+          <Route
             exact
             path="/mappage"
             element={
