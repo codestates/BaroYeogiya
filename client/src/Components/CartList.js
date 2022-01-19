@@ -3,9 +3,8 @@ import * as React from 'react';
 // import axios from 'axios';
 
 function CartList({ userInfo }) {
-
   // const token = userInfo.accessToken.data.accessToken;
-  
+
   // useEffect(()=>{
   //   axios({
   //     url: `${process.env.REACT_APP_SERVER_URL}/store/my-list`,
@@ -22,8 +21,8 @@ function CartList({ userInfo }) {
   //     console.log(error);
   //   });
   // }, [])
-
-  return
-};
+  console.log(userInfo);
+  return <>찜목록 페이지!</>;
+}
 
 export default CartList;

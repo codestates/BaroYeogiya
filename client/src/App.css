@@ -7,3 +7,7 @@
 main {
   flex: 1;
 }
+
+.cartlist-button {
+  margin-top: 100px;
+}
