@@ -19,8 +19,8 @@ function AddNewStore({ clickMaker, userInfo, handleClickStore }) {
       method : 'POST',
       data : {
         address : storeName,
-        latitude : clickMaker.x,
-        longitude : clickMaker.y
+        latitude : clickMaker.y,
+        longitude : clickMaker.x
       },
       headers: {
         Authorization: `Bearer ${token}`,
