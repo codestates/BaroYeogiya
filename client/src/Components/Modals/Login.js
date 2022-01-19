@@ -41,10 +41,6 @@ function Login({ getResponse, handleLoginBtn, getLoging, handleCloseLogin }) {
       });
   };
 
-  useEffect(() => {
-    onClickLogin();
-  }, []);
-
   return (
     <div className="login-entire-box">
       <div className="login-box">

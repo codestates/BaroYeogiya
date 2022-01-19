@@ -1,7 +1,7 @@
 #map {
   position: fixed;
   left: 500px;
-  z-index: 1; /*쓸모없는듯*/
+  /* z-index: 1; */
   width: 80%;
   height: 100vh;
 }
@@ -16,4 +16,70 @@
   padding-top: 10px;
   background-color: white;
   z-index: 999;
+}
+
+/* AddNewStore.css */
+
+.new-store-container{
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(37, 37, 37, 0.7);
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.new-store-box{
+  width: 40%;
+  height: 50%;
+  /* z-index: 3; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #fff;
+}
+
+.img-box{
+  width: 100%;
+  height: 60%;
+  display: flex;
+  justify-content: space-around;
+  /* background-color: burlywood; */
+}
+
+.new-store-txt{
+  width: 20%;
+  height: 90%;
+  border-right: solid 1px #000;
+  /* background-color: cadetblue; */
+}
+
+.new-store-img{
+  width: 70%;
+  height: 100%;
+  /* background-color: chartreuse; */
+}
+
+.store-name-box{
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* background-color: chocolate; */
+}
+
+.new-store-name{
+  width: 20%;
+  height: 50%;
+  border-right: solid 1px #000;
+  /* background-color: cornflowerblue; */
+}
+
+.store-name-input{
+  width: 70%;
+  height: 50%;
+  /* background-color: crimson; */
 }
