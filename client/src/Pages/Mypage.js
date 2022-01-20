@@ -13,6 +13,7 @@ export default function Mypage({
   handleModifyModal,
   handleWithDrawalModal,
   handleCartlistModal,
+  handleInitializeMypage,
   cartlistModal,
   withDrawalModal,
   modifyModal,
@@ -61,19 +62,30 @@ export default function Mypage({
         console.log(err);
       });
   };
-  console.log(withDrawalModal, modifyModal, cartlistModal);
+
   if (!withDrawalModal && !modifyModal && !cartlistModal) {
     return (
       <>
-        <button
-          className="cartlist-button"
-          onClick={() => {
-            handleCartlistModal();
-            likeStore();
-          }}
-        >
-          찜 목록
-        </button>
+        <div className="info-tab-box">
+          <p
+            className="user-info-tab"
+            onClick={() => {
+              handleInitializeMypage();
+            }}
+          >
+            회원 정보
+          </p>
+          <p
+            className="cart-list-tab"
+            onClick={() => {
+              handleCartlistModal();
+              likeStore();
+            }}
+          >
+            {' '}
+            찜 목록
+          </p>
+        </div>
         <UserInfo
           userInfo={userInfo}
           userName={userName}
@@ -88,29 +100,79 @@ export default function Mypage({
   } else if (modifyModal && !withDrawalModal && !cartlistModal) {
     return (
       <>
-        <button onClick={handleCartlistModal}>찜 목록</button>
+        <div className="info-tab-box">
+          <p
+            className="user-info-tab"
+            onClick={() => {
+              handleInitializeMypage();
+            }}
+          >
+            회원 정보
+          </p>
+          <p
+            className="cart-list-tab"
+            onClick={() => {
+              handleCartlistModal();
+              likeStore();
+            }}
+          >
+            찜 목록
+          </p>
+        </div>
         <ModifyUser userName={userName} userInfo={userInfo} />
       </>
     );
   } else if (!modifyModal && !cartlistModal && withDrawalModal) {
     return (
       <>
-        <button onClick={handleCartlistModal}>찜 목록</button>
+        <div className="info-tab-box">
+          <p
+            className="user-info-tab"
+            onClick={() => {
+              handleInitializeMypage();
+            }}
+          >
+            회원 정보
+          </p>
+          <p
+            className="cart-list-tab"
+            onClick={() => {
+              handleCartlistModal();
+              likeStore();
+            }}
+          >
+            찜 목록
+          </p>
+        </div>
         <WithDrawal userInfo={userInfo} handleIsLogin={handleIsLogin} />
       </>
     );
   } else if (!modifyModal && !withDrawalModal && cartlistModal) {
     return (
       <>
-        <div className="cart-list-view">
-          <button className="my-list-bt" onClick={handleCartlistModal}>
+        <div className="info-tab-box">
+          <p
+            className="user-info-tab"
+            onClick={() => {
+              handleInitializeMypage();
+            }}
+          >
+            회원 정보
+          </p>
+          <p
+            className="cart-list-tab"
+            onClick={() => {
+              handleCartlistModal();
+              likeStore();
+            }}
+          >
             찜 목록
-          </button>
-          <div className="store-card-container">
-            {myList.map((like) => (
-              <CartList like={like} userInfo={userInfo} />
-            ))}
-          </div>
+          </p>
+        </div>
+        <div className="store-card-container">
+          {myList.map((like) => (
+            <CartList like={like} userInfo={userInfo} />
+          ))}
         </div>
       </>
     );

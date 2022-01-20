@@ -90,6 +90,7 @@ function App() {
                 handleWithDrawalModal={handleWithDrawalModal}
                 handleModifyModal={handleModifyModal}
                 handleCartlistModal={handleCartlistModal}
+                handleInitializeMypage={handleInitializeMypage}
                 withDrawalModal={withDrawalModal}
                 modifyModal={modifyModal}
                 cartlistModal={cartlistModal}
