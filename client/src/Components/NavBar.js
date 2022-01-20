@@ -181,6 +181,7 @@ function NavBar({
       userInfo: null,
     });
     handleIsLogin(false);
+    navigate('/');
   };
 
   const onMenue = () => {
