@@ -5,7 +5,7 @@ import NavBar from './Components/NavBar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Mypage from './Pages/Mypage';
 import Map from './Pages/Map';
-import GuestMap from './Pages/GuestMap'
+
 
 
 function App() {
@@ -89,11 +89,7 @@ function App() {
             exact
             path="/mappage"
             element={
-              isLogin ? (
-                <Map userInfo={userInfo} />
-              ) : (
-                <GuestMap isLogin={isLogin} />
-              )
+              <Map userInfo={userInfo} isLogin={isLogin} />
             }
           ></Route>
         </Routes>

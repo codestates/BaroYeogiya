@@ -2,12 +2,12 @@ import axios from 'axios';
 import * as React from 'react';
 import '../../Css/Reviews.css'
 
-function Reviews({ marker, userInfo }) {
+function Reviews({ marker, userInfo, isLogin }) {
   
-  const token = userInfo.accessToken.data.accessToken;
   const reviewId = marker.review_uuid
 
   const handleDeleteReview = async () => { // 리뷰 삭제
+    const token = userInfo.accessToken.data.accessToken;
     await axios({
       url: `${process.env.REACT_APP_SERVER_URL}/review/${reviewId}`,
       method : 'delete',
@@ -46,7 +46,10 @@ function Reviews({ marker, userInfo }) {
       <div id='review-txt'>
       리뷰 : {marker.content}
       </div>
+      {isLogin?
       <div id='delete-review' onClick={() => handleDeleteReview()} >X</div>
+      : null
+      }
     </div>
     </>
   )
