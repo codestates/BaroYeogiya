@@ -1,4 +1,27 @@
-.main-page-box{
+.main-page-box {
+    width: 100%;
+    min-height: calc(100vh - 90px);
+}
+
+.main-page-box .main-intro-box>div {
+    width: 100%;
+    height: calc(100vh - 90px);
+}
+
+.main-page-box .main-intro-box>div:nth-child(1) {
+    background-color: #BEE9B4;
+}
+
+.main-page-box .main-intro-box>div:nth-child(2) {
+    background-color: white;
+}
+
+.main-page-box .main-intro-box>div:nth-child(3) {
+    height: calc(100vh - 180px);
+    background-color: #BEE9B4;
+}
+
+/* .main-page-box{
     width: 100vw;
     height: 100vh;
 }
@@ -25,4 +48,4 @@
     width: 100vW;
     height: 25vh;
     background-color: blueviolet;
-}
+} */

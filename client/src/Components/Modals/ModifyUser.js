@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import '../../Css/ModifyUser.css';
 import FooterBar from '../FooterBar';
-export default function MoidfyUser({ userInfo }) {
+export default function MoidfyUser({ userInfo, userName }) {
   const [modifyInfo, setModifyInfo] = useState({
     name: '',
     currentpw: '',
@@ -11,7 +11,7 @@ export default function MoidfyUser({ userInfo }) {
   });
   const token = userInfo.accessToken.data.accessToken;
   const [errorMessage, setErrorMessage] = useState('');
-  console.log(token);
+
   const handleInputValue = (key) => (e) => {
     setModifyInfo({ ...modifyInfo, [key]: e.target.value });
   };
@@ -91,6 +91,7 @@ export default function MoidfyUser({ userInfo }) {
                   onChange={handleInputValue('name')}
                   className="input-width"
                   placeholder="사용하실 닉네임을 입력해주세요."
+                  defaultValue={userName}
                 />
               </div>
             </div>

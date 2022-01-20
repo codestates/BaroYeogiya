@@ -1,93 +1,157 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../Css/NavBar.css';
 import Login from './Modals/Login';
 import SignUp from './Modals/SignUp';
 import { useNavigate } from 'react-router-dom';
-import '../Css/Toggle.css'
+import '../Css/Toggle.css';
 
 // 로그인시 나타나는 헤더
-const UserHeader = ({ handleInitializeMypage, onLogout, navigate, onMenue }) => (
+const UserHeader = ({
+  handleInitializeMypage,
+  onLogout,
+  navigate,
+  onMenue,
+}) => (
   <>
     <div className="nav-box">
-      <div className="logo-img-box" onClick={() => navigate('/')} >
-          <a className="bt">로고</a>
+      <div className="logo-img-box">
+        <a className="bt" onClick={() => navigate('/')}>
+          BaroYeogiya
+        </a>
       </div>
       <div className="nav-menue-box">
-        <div className="menue-box" >
-          <div onClick={() => navigate('/mappage')} >
-          <a className="bt" >지도</a>
-          </div>
-          <div onClick={() => navigate('/mypage')} >
-            <a onClick={handleInitializeMypage} className="bt">
-              My Page
-            </a>
-          </div>
-          <a className="bt" onClick={() => onLogout()}>
-            Logout
-          </a>
-          <img id='img-box' onClick={() => onMenue()}></img>
-        </div>
-      </div>
-    </div>
-  </>
-)
-
-// 게스트 헤더
-const GuestHeader = ({ navigate, handleLoginBtn, handleSignUpBtn, onMenue }) => (
-  <div className="nav-box">
-    <div onClick={() => navigate('/')} className="logo-img-box">
-      <a className="bt">로고</a>
-    </div>
-    <div className="nav-menue-box">
-      <div className="menue-box">
         <a onClick={() => navigate('/mappage')} className="bt">
           지도
         </a>
-        <a className="bt" onClick={() => handleLoginBtn(true)}>
-          로그인
+        <a onClick={handleInitializeMypage, () => navigate('/mypage')} className="bt">
+          마이페이지
         </a>
-        <a className="bt" onClick={() => handleSignUpBtn(true)}>
-          회원가입
+        <a className="bt" onClick={() => onLogout()}>
+          로그아웃
         </a>
         <img id='img-box' onClick={() => onMenue()}></img>
       </div>
     </div>
-  </div>
-)
+  </>
+);
 
+// 게스트 헤더
+const GuestHeader = ({
+  navigate,
+  handleLoginBtn,
+  handleSignUpBtn,
+  onMenue,
+}) => (
+  <div className="nav-box">
+    <div className="logo-img-box">
+      <a className="bt" onClick={() => navigate('/')}>
+        BaroYeogiya
+      </a>
+    </div>
+    <div className="nav-menue-box">
+      <a onClick={() => navigate('/mappage')} className="bt">
+        지도
+      </a>
+      <a className="bt" onClick={() => handleLoginBtn(true)}>
+        로그인
+      </a>
+      <a className="bt" onClick={() => handleSignUpBtn(true)}>
+        회원가입
+      </a>
+      <img id='img-box' onClick={() => onMenue()}></img>
+    </div>
+  </div>
+);
 
 // 게스트 헤더의 토글
-const GuestToggle = ({ navigate, handleLoginBtn, handleSignUpBtn, onMenue }) => (
-  <div id='toggle-container'>
-    <nav id='toggle-box'>
+const GuestToggle = ({
+  navigate,
+  handleLoginBtn,
+  handleSignUpBtn,
+  onMenue,
+}) => (
+  <div id="toggle-container">
+    <nav id="toggle-box">
       <ul>
-        <li onClick={() => { navigate('/mappage'); onMenue(); }} >지도</li>
-        <li onClick={() => { handleLoginBtn(true); onMenue(); }} >로그인</li>
-        <li onClick={() => { handleSignUpBtn(true); onMenue(); }} >회원가입</li>
+        <li
+          onClick={() => {
+            navigate('/mappage');
+            onMenue();
+          }}
+        >
+          지도
+        </li>
+        <li
+          onClick={() => {
+            handleLoginBtn(true);
+            onMenue();
+          }}
+        >
+          로그인
+        </li>
+        <li
+          onClick={() => {
+            handleSignUpBtn(true);
+            onMenue();
+          }}
+        >
+          회원가입
+        </li>
       </ul>
     </nav>
   </div>
-)
+);
 
 // 로그인 헤더의 토글
-const UserToggle = ({ handleInitializeMypage, onLogout, navigate, onMenue }) => (
-  <div id='toggle-container'>
-    <nav id='toggle-box'>
+const UserToggle = ({
+  handleInitializeMypage,
+  onLogout,
+  navigate,
+  onMenue,
+}) => (
+  <div id="toggle-container">
+    <nav id="toggle-box">
       <ul>
-        <li onClick={() => { navigate('/mappage'); onMenue(); }} >지도</li>
-        <li onClick={() => { navigate('/mypage'); onMenue(); handleInitializeMypage() }} >My Page</li>
-        <li onClick={() => { onLogout(); onMenue(); }} >Logout</li>
+        <li
+          onClick={() => {
+            navigate('/mappage');
+            onMenue();
+          }}
+        >
+          지도
+        </li>
+        <li
+          onClick={() => {
+            navigate('/mypage');
+            onMenue();
+            handleInitializeMypage();
+          }}
+        >
+          My Page
+        </li>
+        <li
+          onClick={() => {
+            onLogout();
+            onMenue();
+          }}
+        >
+          Logout
+        </li>
       </ul>
     </nav>
   </div>
-)
+);
 
-
-
-function NavBar({ handleResponse, handleIsLogin, isLogin, handleInitializeMypage }) {
+function NavBar({
+  handleResponse,
+  handleIsLogin,
+  isLogin,
+  handleInitializeMypage,
+}) {
   const [loginModalBtn, setLoginModalBtn] = useState(false);
   const [signUpModalBtn, setSignUpModalBtn] = useState(false);
-  const [showMenue, setShowMenue] = useState(false) //토글 버튼
+  const [showMenue, setShowMenue] = useState(false); //토글 버튼
   const navigate = useNavigate();
 
   const handleLoginBtn = (bool) => {
@@ -121,9 +185,8 @@ function NavBar({ handleResponse, handleIsLogin, isLogin, handleInitializeMypage
 
   const onMenue = () => {
     // 토글 state 값을 변경
-    setShowMenue(!showMenue)
-  }
-
+    setShowMenue(!showMenue);
+  };
 
   return (
     <>
@@ -143,14 +206,38 @@ function NavBar({ handleResponse, handleIsLogin, isLogin, handleInitializeMypage
       ) : null}
 
       {showMenue ? ( // 값이 true일때 토글을 보여준다
-        <GuestToggle onMenue={onMenue} navigate={navigate} handleLoginBtn={handleLoginBtn} handleSignUpBtn={handleSignUpBtn}  />
-      ) : null }
-
-      {showMenue && isLogin ? ( //토글 state 값이 true일때, 로그인 state 값이 true일때 토글을 보여준다
-        <UserToggle onMenue={onMenue} onLogout={onLogout} handleInitializeMypage={handleInitializeMypage} navigate={navigate} />
+        <GuestToggle
+          onMenue={onMenue}
+          navigate={navigate}
+          handleLoginBtn={handleLoginBtn}
+          handleSignUpBtn={handleSignUpBtn}
+        />
       ) : null}
 
-      {isLogin ? <UserHeader onMenue={onMenue} onLogout={onLogout} handleInitializeMypage={handleInitializeMypage} navigate={navigate} /> : <GuestHeader onMenue={onMenue} navigate={navigate} handleLoginBtn={handleLoginBtn} handleSignUpBtn={handleSignUpBtn} /> }
+      {showMenue && isLogin ? ( //토글 state 값이 true일때, 로그인 state 값이 true일때 토글을 보여준다
+        <UserToggle
+          onMenue={onMenue}
+          onLogout={onLogout}
+          handleInitializeMypage={handleInitializeMypage}
+          navigate={navigate}
+        />
+      ) : null}
+
+      {isLogin ? (
+        <UserHeader
+          onMenue={onMenue}
+          onLogout={onLogout}
+          handleInitializeMypage={handleInitializeMypage}
+          navigate={navigate}
+        />
+      ) : (
+        <GuestHeader
+          onMenue={onMenue}
+          navigate={navigate}
+          handleLoginBtn={handleLoginBtn}
+          handleSignUpBtn={handleSignUpBtn}
+        />
+      )}
     </>
   );
 }
