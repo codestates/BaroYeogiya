@@ -5,7 +5,6 @@ import NavBar from './Components/NavBar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Mypage from './Pages/Mypage';
 import Map from './Pages/Map';
-import GuestMap from './Pages/GuestMap';
 
 function App() {
   // 로그인 상태 => window 전역 객체에 저장하고 조회
@@ -103,11 +102,7 @@ function App() {
             exact
             path="/mappage"
             element={
-              isLogin ? (
-                <Map userInfo={userInfo} />
-              ) : (
-                <GuestMap isLogin={isLogin} />
-              )
+              <Map userInfo={userInfo} isLogin={isLogin} />
             }
           ></Route>
         </Routes>

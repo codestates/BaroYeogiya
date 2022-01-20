@@ -1,9 +1,15 @@
 #map {
   position: fixed;
   left: 500px;
-  /* z-index: 1; */
+  z-index: 1;
   width: 80%;
   height: 100vh;
+}
+
+.like-bt{
+  background-color: darkgoldenrod;
+  margin-left: 500px;
+  /* z-index: 5; */
 }
 
 .with-map-siderbar {
@@ -46,20 +52,17 @@
   height: 60%;
   display: flex;
   justify-content: space-around;
-  /* background-color: burlywood; */
 }
 
 .new-store-txt{
   width: 20%;
   height: 90%;
   border-right: solid 1px #000;
-  /* background-color: cadetblue; */
 }
 
 .new-store-img{
   width: 70%;
   height: 100%;
-  /* background-color: chartreuse; */
 }
 
 .store-name-box{
@@ -68,18 +71,15 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  /* background-color: chocolate; */
 }
 
 .new-store-name{
   width: 20%;
   height: 50%;
   border-right: solid 1px #000;
-  /* background-color: cornflowerblue; */
 }
 
 .store-name-input{
   width: 70%;
   height: 50%;
-  /* background-color: crimson; */
 }

@@ -1,9 +1,7 @@
 import axios from 'axios';
 import * as React from 'react';
-// import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import SelectedStore from './SelectedStore';
-import GuestSelectedStore from './GuestSelectedStore';
 
 import '../../Css/NavBar.css'
 import '../../Css/StoreList.css'
@@ -54,14 +52,10 @@ const StoreList = ({ currentMaker, userInfo, isLogin }) => { //map에서 props �
   return (
     <>
       {storeClick ? <SelectedStore storeId={storeId} userInfo={userInfo} isLogin={isLogin} /> : null }
-      {/* {isLogin ? <GuestSelectedStore /> : null} */}
       <div id="map-store-list-box">
         <div id="map-store-list">
           <div id="map-siderbar">
-            {/* <Link to="/"> */}
             <button className="bt">로고</button>
-            {/* css 수정 해야됨, Link 왜 안되는거지? */}
-            {/* </Link> */}
           </div>
           <div id="pin-store">
             <button className="bt" onClick={() => { showReview(); } }>
