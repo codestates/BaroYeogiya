@@ -1,7 +1,7 @@
-html,
-body {
+html, body {
   font-size: 0.5208vw;
 }
+
 
 /* .wrap {
   display: flex;
@@ -11,9 +11,4 @@ body {
 
 main {
   flex: 1;
-}
-
-.cartlist-button {
-  margin-top: 100px;
-}
-*/
+} */

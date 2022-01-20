@@ -24,15 +24,13 @@ const UserHeader = ({
         <a onClick={() => navigate('/mappage')} className="bt">
           지도
         </a>
-        <Link to="/mypage">
-          <a onClick={handleInitializeMypage} className="bt">
-            마이페이지
-          </a>
-        </Link>
+        <a onClick={handleInitializeMypage, () => navigate('/mypage')} className="bt">
+          마이페이지
+        </a>
         <a className="bt" onClick={() => onLogout()}>
           로그아웃
         </a>
-        <img id="img-box" onClick={() => onMenue()}></img>
+        <img id='img-box' onClick={() => onMenue()}></img>
       </div>
     </div>
   </>
@@ -61,7 +59,7 @@ const GuestHeader = ({
       <a className="bt" onClick={() => handleSignUpBtn(true)}>
         회원가입
       </a>
-      <img id="img-box" onClick={() => onMenue()}></img>
+      <img id='img-box' onClick={() => onMenue()}></img>
     </div>
   </div>
 );
