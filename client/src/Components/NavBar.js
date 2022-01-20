@@ -9,24 +9,22 @@ import '../Css/Toggle.css'
 const UserHeader = ({ handleInitializeMypage, onLogout, navigate, onMenue }) => (
   <>
     <div className="nav-box">
-      <div className="logo-img-box" onClick={() => navigate('/')} >
-          <a className="bt">로고</a>
+      <div className="logo-img-box">
+          <a className="bt" onClick={() => navigate('/')}>
+            BaroYeogiya
+          </a>
       </div>
       <div className="nav-menue-box">
-        <div className="menue-box" >
-          <div onClick={() => navigate('/mappage')} >
-          <a className="bt" >지도</a>
-          </div>
-          <div onClick={() => navigate('/mypage')} >
-            <a onClick={handleInitializeMypage} className="bt">
-              My Page
-            </a>
-          </div>
-          <a className="bt" onClick={() => onLogout()}>
-            Logout
-          </a>
-          <img id='img-box' onClick={() => onMenue()}></img>
-        </div>
+        <a onClick={() => navigate('/mappage')} className="bt">
+          지도
+        </a>
+        <a onClick={handleInitializeMypage, () => navigate('/mypage')} className="bt">
+          마이페이지
+        </a>
+        <a className="bt" onClick={() => onLogout()}>
+          로그아웃
+        </a>
+        <img id='img-box' onClick={() => onMenue()}></img>
       </div>
     </div>
   </>
@@ -35,22 +33,22 @@ const UserHeader = ({ handleInitializeMypage, onLogout, navigate, onMenue }) => 
 // 게스트 헤더
 const GuestHeader = ({ navigate, handleLoginBtn, handleSignUpBtn, onMenue }) => (
   <div className="nav-box">
-    <div onClick={() => navigate('/')} className="logo-img-box">
-      <a className="bt">로고</a>
+    <div className="logo-img-box">
+        <a className="bt" onClick={() => navigate('/')}>
+          BaroYeogiya
+        </a>
     </div>
     <div className="nav-menue-box">
-      <div className="menue-box">
-        <a onClick={() => navigate('/mappage')} className="bt">
-          지도
-        </a>
-        <a className="bt" onClick={() => handleLoginBtn(true)}>
-          로그인
-        </a>
-        <a className="bt" onClick={() => handleSignUpBtn(true)}>
-          회원가입
-        </a>
-        <img id='img-box' onClick={() => onMenue()}></img>
-      </div>
+      <a onClick={() => navigate('/mappage')} className="bt">
+        지도
+      </a>
+      <a className="bt" onClick={() => handleLoginBtn(true)}>
+        로그인
+      </a>
+      <a className="bt" onClick={() => handleSignUpBtn(true)}>
+        회원가입
+      </a>
+      <img id='img-box' onClick={() => onMenue()}></img>
     </div>
   </div>
 )

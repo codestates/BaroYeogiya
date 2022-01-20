@@ -7,6 +7,7 @@ function Login({ getResponse, handleLoginBtn, getLoging, handleCloseLogin }) {
   // userInfo는 access_token 실은 정보
   const [LoginId, setLoginId] = useState('');
   const [LoginPw, setLoginPw] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleLoginId = (e) => {
     setLoginId(e.target.value);
@@ -17,56 +18,57 @@ function Login({ getResponse, handleLoginBtn, getLoging, handleCloseLogin }) {
   };
 
   const onClickLogin = () => {
-    // console.log('Click?')
-    axios({
-      url: `${process.env.REACT_APP_SERVER_URL}/user/login`,
-      method: 'GET',
-      params: {
-        id: LoginId,
-        pw: LoginPw,
-      },
-      withCredentials: true,
-    })
-      .then((res) => {
-        if (res.status === 400) {
-          alert('아이디와 비밀번호의 정보가 일치하지 않습니다.');
-        } else if (res.status === 200) {
+    if (LoginId === '') {
+      setErrorMessage('아이디를 입력해주세요.');
+    } else if (LoginPw === '') {
+      setErrorMessage('비밀번호를 입력해주세요.');
+    } else {
+      axios({
+        url: `${process.env.REACT_APP_SERVER_URL}/user/login`,
+        method: 'GET',
+        params: {
+          id: LoginId,
+          pw: LoginPw,
+        },
+        withCredentials: true,
+      })
+        .then((res) => {
           getResponse(res);
           getLoging(true);
           handleLoginBtn(false);
-        }
-      })
-      .catch((error) => {
-        return error;
-      });
+        })
+        .catch((error) => {
+          setErrorMessage('아이디와 비밀번호의 정보가 일치하지 않습니다.');
+        });
+    }
   };
-
-  useEffect(() => {
-    onClickLogin();
-  }, []);
 
   return (
     <div className="login-entire-box">
       <div className="login-box">
         <div className="close-login" onClick={handleCloseLogin}>
-          X
+          <img src="Images/exit.svg"></img>
         </div>
-        <h1>로그인</h1>
-        <div className="input-id">
-          <p>ID</p>
-          <input className="input-id" type="text" onChange={handleLoginId} />
+        <div className="login-form">
+          <h1>로그인</h1>
+          <div className="input-id">
+            <p>아이디</p>
+            <input className="input-id" type="text" maxLength="10" onChange={handleLoginId} />
+          </div>
+          <div className="input-pw">
+            <p>비밀번호</p>
+            <input
+              className="input-pw"
+              type="password"
+              onChange={handleLoginPw}
+              maxLength="16"
+            />
+          </div>
+          <div className="login-message">{errorMessage}</div>
+          <button className="login-bt" onClick={onClickLogin}>
+            로그인
+          </button>
         </div>
-        <div className="input-pw">
-          <p>PW</p>
-          <input
-            className="input-pw"
-            type="password"
-            onChange={handleLoginPw}
-          />
-        </div>
-        <button className="login-bt" onClick={onClickLogin}>
-          로그인
-        </button>
       </div>
     </div>
   );
