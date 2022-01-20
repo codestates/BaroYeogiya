@@ -1,15 +1,15 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
-// import axios from 'axios';
 import MainPage from './Pages/MainPage';
 import NavBar from './Components/NavBar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Mypage from './Pages/Mypage';
 import Map from './Pages/Map';
-import UserNavBar from './Components/UserNavBar';
-import GuestMap from './Pages/GuestMap';
+import GuestMap from './Pages/GuestMap'
+
 
 function App() {
+
   // 로그인 상태 => window 전역 객체에 저장하고 조회
   const [isLogin, setIsLogin] = useState(() =>
     JSON.parse(window.localStorage.getItem('isLogin') || false)
@@ -27,6 +27,7 @@ function App() {
   useEffect(() => {
     window.localStorage.setItem('userInfo', JSON.stringify(userInfo));
   }, [userInfo]);
+
 
   const [withDrawalModal, setWithDrawlalModal] = useState(false);
   const [cartlistModal, setCartlistModal] = useState(false);
@@ -73,19 +74,12 @@ function App() {
   return (
     <div className="App">
       <Router>
-        {isLogin ? (
-          <UserNavBar
-            handleResponse={handleResponse}
-            handleIsLogin={handleIsLogin}
-            handleInitializeMypage={handleInitializeMypage}
-          />
-        ) : (
           <NavBar
             handleResponse={handleResponse}
             handleIsLogin={handleIsLogin}
+            handleInitializeMypage={handleInitializeMypage}
+            isLogin={isLogin}
           />
-        )}
-        {/* isLogin 상태에 따라 로그인된 Nav가 나올지 게스트 Nav가 나올지 정했다. */}
         <Routes>
           <Route
             exact

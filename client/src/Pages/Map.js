@@ -9,6 +9,7 @@ import axios from 'axios';
 // import SelectedStore from '../Components/Modals/SelectedStore'
 import StoreListSiderBar from '../Components/Modals/StoreListSiderBar';
 import StoreList from '../Components/Modals/StoreList';
+import AddNewStore from '../Components/Modals/AddNewStore';
 
 const { kakao } = window;
 
@@ -17,6 +18,17 @@ const Map = ({ userInfo }) => {
   const [InputText, setInputText] = useState('');
   // 장소 입력에 들어가는 입력값
   const [search, setSearch] = useState('');
+  const [newStoreClick, setNewStoreClick] = useState(false);
+  const [clickMaker, setClickMaker] = useState();
+
+  const handleClickStore = () => {
+    setNewStoreClick(!newStoreClick);
+  };
+
+  const ClickedMaker = (res) => {
+    setClickMaker(res);
+  };
+
   // 입력 시마다 검색 함수에 들어가게 하는 onChange 함수
   const onChange = (e) => {
     setInputText(e.target.value);
@@ -35,6 +47,7 @@ const Map = ({ userInfo }) => {
     setSearch(item.target.innerHTML);
     setInputText(item.target.innerHTML);
   };
+
   const [currentMaker, setCurrentMaker] = useState(null);
   // const [like, setLike] = useState(true)
   const [isClick, setIsClick] = useState(false);
@@ -94,6 +107,8 @@ const Map = ({ userInfo }) => {
             '</div>'
         );
         infowindow.open(map, marker);
+        handleClickStore();
+        ClickedMaker(place)
       });
     }
 
@@ -180,6 +195,7 @@ const Map = ({ userInfo }) => {
 
   return (
     <>
+      {newStoreClick ? (<AddNewStore clickMaker={clickMaker} userInfo={userInfo} handleClickStore={handleClickStore} />) : null}
       <div className="inputform">
         <form>
           <input

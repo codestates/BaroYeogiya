@@ -1,0 +1,31 @@
+
+
+
+/* #toggle-container{
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(37, 37, 37, 0.7);
+  margin-top: 50px;
+  position: fixed;
+  z-index: 998;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#toggle-box{
+  width: 150px;
+  height: 100px;
+  background-color: rgb(155, 119, 189);
+}
+
+#toggle-box li{
+  cursor: pointer;
+}
+
+#img-box{
+  width: 20px;
+  height: 20px;
+  background: url(../Images/twentyfour.png) no-repeat center center;
+  cursor: pointer;
+}
+ */
