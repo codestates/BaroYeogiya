@@ -17,16 +17,20 @@ export default function SignUp({ handleSignUpBtn, handleCloseSignUp }) {
 
   const handleSignUp = () => {
     const { id, pw, name, pwconfirm } = signUpInfo;
-    if (!id || !pw || !name || !pwconfirm) {
-      setErrorMessage(
-        'id, 닉네임, 비밀번호, 비밀번호 확인을 모두 입력해야합니다.'
-      );
+    if (!id) {
+      setErrorMessage('아이디를 입력해주세요.');
+    } else if (!name) {
+      setErrorMessage('닉네임을 입력해주세요.');
     } else if (name.length > 10) {
-      setErrorMessage('닉네임은 10글자 이내로 입력해야합니다.');
-    } else if (pw.length < 8 || pwconfirm.length < 8) {
-      setErrorMessage('비밀번호는 8글자 이상 입력해야합니다.');
+      setErrorMessage('닉네임은 10글자 이내로 입력해주세요.');
+    } else if (!pw) {
+      setErrorMessage('비밀번호를 입력해주세요.');
+    } else if (pw.length < 8) {
+      setErrorMessage('비밀번호를 8글자 이상 입력해주세요.');
+    } else if (!pwconfirm) {
+      setErrorMessage('비밀번호 확인을 입력해주세요.');
     } else if (pw !== pwconfirm) {
-      setErrorMessage('비밀번호가 일치하지 않습니다.');
+      setErrorMessage('비밀번호와 확인이 일치하지 않습니다.');
     } else {
       axios({
         method: 'POST',
@@ -39,7 +43,7 @@ export default function SignUp({ handleSignUpBtn, handleCloseSignUp }) {
       })
         .then((result) => {
           if (result.status === 200) {
-            setErrorMessage('이미 동일한 id가 존재합니다.');
+            setErrorMessage('이미 동일한 아이디가 존재합니다.');
           } else if (result.status === 201) {
             setUserModal(true);
             setErrorMessage('가입이 완료되었습니다.');
@@ -59,59 +63,65 @@ export default function SignUp({ handleSignUpBtn, handleCloseSignUp }) {
       <div className="signup-entire-box">
         <div className="signup-box">
           <div className="close-signup" onClick={handleCloseSignUp}>
-            X
+            <img src="Images/exit.svg"></img>
           </div>
-          <h2 id="signup-title">회원가입</h2>
-          <form onSubmit={(e) => e.preventDefault()}>
-            <div>
-              id
-              <div className="input-field">
-                <input
-                  type="text"
-                  onChange={handleInputValue('id')}
-                  className="input-width"
-                  placeholder="사용하실 id를 입력해주세요."
-                />
+          <div className="signup-form">
+            <h2 id="signup-title">회원가입</h2>
+            <form onSubmit={(e) => e.preventDefault()}>
+              <div>
+                <p>아이디</p>
+                <div className="input-field">
+                  <input
+                    type="text"
+                    onChange={handleInputValue('id')}
+                    className="input-width"
+                    placeholder="사용하실 id를 입력해주세요."
+                    maxLength="10"
+                  />
+                </div>
               </div>
-            </div>
-            <div>
-              닉네임
-              <div className="input-field">
-                <input
-                  type="text"
-                  onChange={handleInputValue('name')}
-                  className="input-width"
-                  placeholder="사용하실 닉네임을 입력해주세요."
-                />
+              <div>
+                <p>닉네임</p>
+                <div className="input-field">
+                  <input
+                    type="text"
+                    onChange={handleInputValue('name')}
+                    className="input-width"
+                    placeholder="사용하실 닉네임을 입력해주세요."
+                    maxLength="10"
+                  />
+                </div>
               </div>
-            </div>
-            <div>
-              비밀번호
-              <div className="password-field">
-                <input
-                  type="password"
-                  onChange={handleInputValue('pw')}
-                  className="input-width"
-                  placeholder="비밀번호"
-                />
+              <div>
+                <p>비밀번호</p>
+                <div className="password-field">
+                  <input
+                    type="password"
+                    onChange={handleInputValue('pw')}
+                    className="input-width"
+                    placeholder="비밀번호"
+                    maxLength="16"
+                  />
+                </div>
               </div>
-            </div>
-            <div>
-              비밀번호 확인
-              <div className="password-field">
-                <input
-                  type="password"
-                  onChange={handleInputValue('pwconfirm')}
-                  className="input-width"
-                  placeholder="비밀번호 확인"
-                />
+              <div>
+                <p>비밀번호 확인</p>
+                <div className="password-field">
+                  <input
+                    type="password"
+                    onChange={handleInputValue('pwconfirm')}
+                    className="input-width"
+                    placeholder="비밀번호 확인"
+                    maxLength="16"
+                  />
+                </div>
               </div>
-            </div>
-            <button className="btn" type="submit" onClick={handleSignUp}>
-              회원가입
-            </button>
-            <div className="alert-box">{errorMessage}</div>
-          </form>
+              <div className="signup-message">{errorMessage}</div>
+              <button className="signup-btn" type="submit" onClick={handleSignUp}>
+                회원가입
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </>
