@@ -7,13 +7,14 @@ import axios from 'axios';
 import FooterBar from './FooterBar';
 export default function UserInfo({
   userInfo,
+  userName,
+  handleUserName,
   handleWithDrawalModal,
   handleModifyModal,
   handleResponse,
   handleIsLogin,
 }) {
   const [userId, setUserId] = useState('');
-  const [userName, setUserName] = useState('');
 
   const token = userInfo.accessToken.data.accessToken;
   console.log(token);
@@ -33,7 +34,7 @@ export default function UserInfo({
         if (result.status === 200) {
           //불러와졌을 경우
           setUserId(id);
-          setUserName(name);
+          handleUserName(name);
         }
       })
       .catch((err) => {
