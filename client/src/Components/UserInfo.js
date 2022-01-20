@@ -17,7 +17,7 @@ export default function UserInfo({
   const [userId, setUserId] = useState('');
 
   const token = userInfo.accessToken.data.accessToken;
-  console.log(token);
+
   const [errorMessage, setErrorMessage] = useState('');
 
   const userInfoRequest = () => {
