@@ -1,4 +1,9 @@
-.wrap {
+html, body {
+  font-size: 0.5208vw;
+}
+
+
+/* .wrap {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
