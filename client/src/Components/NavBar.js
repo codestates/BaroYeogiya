@@ -11,7 +11,7 @@ const UserHeader = ({
   handleInitializeMypage,
   onLogout,
   navigate,
-  onMenue,
+  onMenu,
 }) => (
   <>
     <div className="nav-box">
@@ -24,13 +24,15 @@ const UserHeader = ({
         <a onClick={() => navigate('/mappage')} className="bt">
           지도
         </a>
-        <a onClick={handleInitializeMypage, () => navigate('/mypage')} className="bt">
-          마이페이지
-        </a>
+        <Link to="/mypage">
+          <a onClick={handleInitializeMypage} className="bt">
+            마이페이지
+          </a>
+        </Link>
         <a className="bt" onClick={() => onLogout()}>
           로그아웃
         </a>
-        <img id='img-box' onClick={() => onMenue()}></img>
+        <img id='img-box' onClick={() => onMenu()}></img>
       </div>
     </div>
   </>
@@ -41,7 +43,7 @@ const GuestHeader = ({
   navigate,
   handleLoginBtn,
   handleSignUpBtn,
-  onMenue,
+  onMenu,
 }) => (
   <div className="nav-box">
     <div className="logo-img-box">
@@ -59,7 +61,7 @@ const GuestHeader = ({
       <a className="bt" onClick={() => handleSignUpBtn(true)}>
         회원가입
       </a>
-      <img id='img-box' onClick={() => onMenue()}></img>
+      <img id='img-box' onClick={() => onMenu()}></img>
     </div>
   </div>
 );
@@ -69,7 +71,7 @@ const GuestToggle = ({
   navigate,
   handleLoginBtn,
   handleSignUpBtn,
-  onMenue,
+  onMenu,
 }) => (
   <div id="toggle-container">
     <nav id="toggle-box">
@@ -77,7 +79,7 @@ const GuestToggle = ({
         <li
           onClick={() => {
             navigate('/mappage');
-            onMenue();
+            onMenu();
           }}
         >
           지도
@@ -85,7 +87,7 @@ const GuestToggle = ({
         <li
           onClick={() => {
             handleLoginBtn(true);
-            onMenue();
+            onMenu();
           }}
         >
           로그인
@@ -93,7 +95,7 @@ const GuestToggle = ({
         <li
           onClick={() => {
             handleSignUpBtn(true);
-            onMenue();
+            onMenu();
           }}
         >
           회원가입
@@ -108,7 +110,7 @@ const UserToggle = ({
   handleInitializeMypage,
   onLogout,
   navigate,
-  onMenue,
+  onMenu,
 }) => (
   <div id="toggle-container">
     <nav id="toggle-box">
@@ -116,7 +118,7 @@ const UserToggle = ({
         <li
           onClick={() => {
             navigate('/mappage');
-            onMenue();
+            onMenu();
           }}
         >
           지도
@@ -124,7 +126,7 @@ const UserToggle = ({
         <li
           onClick={() => {
             navigate('/mypage');
-            onMenue();
+            onMenu();
             handleInitializeMypage();
           }}
         >
@@ -133,7 +135,7 @@ const UserToggle = ({
         <li
           onClick={() => {
             onLogout();
-            onMenue();
+            onMenu();
           }}
         >
           Logout
@@ -183,7 +185,7 @@ function NavBar({
     handleIsLogin(false);
   };
 
-  const onMenue = () => {
+  const onMenu = () => {
     // 토글 state 값을 변경
     setShowMenue(!showMenue);
   };
@@ -207,7 +209,7 @@ function NavBar({
 
       {showMenue ? ( // 값이 true일때 토글을 보여준다
         <GuestToggle
-          onMenue={onMenue}
+          onMenu={onMenu}
           navigate={navigate}
           handleLoginBtn={handleLoginBtn}
           handleSignUpBtn={handleSignUpBtn}
@@ -216,7 +218,7 @@ function NavBar({
 
       {showMenue && isLogin ? ( //토글 state 값이 true일때, 로그인 state 값이 true일때 토글을 보여준다
         <UserToggle
-          onMenue={onMenue}
+          onMenu={onMenu}
           onLogout={onLogout}
           handleInitializeMypage={handleInitializeMypage}
           navigate={navigate}
@@ -225,14 +227,14 @@ function NavBar({
 
       {isLogin ? (
         <UserHeader
-          onMenue={onMenue}
+          onMenu={onMenu}
           onLogout={onLogout}
           handleInitializeMypage={handleInitializeMypage}
           navigate={navigate}
         />
       ) : (
         <GuestHeader
-          onMenue={onMenue}
+          onMenu={onMenu}
           navigate={navigate}
           handleLoginBtn={handleLoginBtn}
           handleSignUpBtn={handleSignUpBtn}

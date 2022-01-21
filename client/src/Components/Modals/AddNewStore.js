@@ -3,9 +3,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function AddNewStore({ clickMaker, userInfo, handleClickStore }) {
-
-  const token = userInfo.accessToken.data.accessToken;
+function AddNewStore({ clickMaker, userInfo, handleClickStore, currentMaker }) {
 
   const [storeName, setStoreName] = useState('')
 
@@ -13,14 +11,16 @@ function AddNewStore({ clickMaker, userInfo, handleClickStore }) {
     setStoreName(e.target.value)
   }
 
+  // latitude: clickMaker.y,longitude: clickMaker.x
   const onClickNewStore = () => {
+    const token = userInfo.accessToken.data.accessToken;
     axios({
       url : `${process.env.REACT_APP_SERVER_URL}/store`,
       method : 'POST',
       data : {
         address : storeName,
-        latitude : clickMaker.y,
-        longitude : clickMaker.x
+        latitude: clickMaker.y,
+        longitude: clickMaker.x 
       },
       headers: {
         Authorization: `Bearer ${token}`,
