@@ -8,8 +8,6 @@ function SelectedStore({ storeId, userInfo, isLogin }) { // storeList에서 넘�
 
   const [ storeReviews, setStoreReview ] = useState([]); //가게에 대한 데이터가 들어옴
   const [ reviewTxt, setReviewTxt ] = useState(''); // 리뷰 작성으로 얻은 문자열 들어옴
-  
-  // const token = userInfo.accessToken.data.accessToken; // props로 받은 토큰
 
   const handleReviewTxt = (e) => { // 새롭게 저장할 리뷰
     setReviewTxt(e.target.value);
@@ -24,7 +22,7 @@ function SelectedStore({ storeId, userInfo, isLogin }) { // storeList에서 넘�
       url: `${process.env.REACT_APP_SERVER_URL}/review`,
       method : 'GET',
       params : {
-        store_uuid : storeId,
+        store_uuid: storeId,
       }
     })
     .then((res)=>{
@@ -65,6 +63,7 @@ function SelectedStore({ storeId, userInfo, isLogin }) { // storeList에서 넘�
     })
       .then((res) => {
         if (res.status === 200) {
+          alert('리뷰가 추가 되었습니다.')
           const newReview = res.data.data
           setStoreReview(current => [...current, newReview])
         }
@@ -129,15 +128,15 @@ function SelectedStore({ storeId, userInfo, isLogin }) { // storeList에서 넘�
         <div id='reviews-scroll-box'>
           {storeReviews.map((marker, idx) => <Reviews key={idx} marker={marker} userInfo={userInfo} isLogin={isLogin} />) }
         </div>
-        <input id='review-write' onChange={handleReviewTxt} ></input>
-        {isLogin?
-        <button id='register-review' onClick={onClickReview} > 리뷰추가 </button>
-        : <button id='register-my-pick' onClick={handlePick} > 리뷰추가 </button>
-        }
-        {isLogin?
-        <button id='register-my-pick' onClick={handleMyPick} >찜 하기</button>
-        : <button id='register-my-pick' onClick={handlePick} >찜 하기</button>
-        }
+          <input id='review-write' onChange={handleReviewTxt} ></input>
+          {isLogin?
+            <button id='register-review' onClick={onClickReview} > 리뷰추가 </button>
+            : <button id='register-my-pick' onClick={handlePick} > 리뷰추가 </button>
+          }
+          {isLogin?
+            <button id='register-my-pick' onClick={handleMyPick} >찜 하기</button>
+            : <button id='register-my-pick' onClick={handlePick} >찜 하기</button>
+          }
       </div>
     </div>
   )
