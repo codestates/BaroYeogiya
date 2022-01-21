@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import WithDrawal from '../Components/Modals/WithDrawal';
+import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import ModifyUser from '../Components/Modals/ModifyUser';
 import '../Css/UserInfo.css';
@@ -16,6 +17,7 @@ export default function UserInfo({
 }) {
   const [userId, setUserId] = useState('');
 
+  const navigate = useNavigate();
   const token = userInfo.accessToken.data.accessToken;
 
   const [errorMessage, setErrorMessage] = useState('');
@@ -56,6 +58,7 @@ export default function UserInfo({
               if (err.response.status === 400) {
                 // 유효한 접근이 아니므로 로그아웃 처리
                 handleIsLogin(false);
+                navigate('/');
               }
             });
         }

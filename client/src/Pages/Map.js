@@ -17,7 +17,7 @@ const Map = ({ userInfo, isLogin }) => {
   // 입력 칸(검색어를 입력하세요 부분)에 들어가는 문자열 state
   const [InputText, setInputText] = useState('');
   // 장소 입력에 들어가는 입력값
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState(' ');
   const [newStoreClick, setNewStoreClick] = useState(false);
   const [clickMaker, setClickMaker] = useState();
   const [currentMaker, setCurrentMaker] = useState(null);
@@ -34,10 +34,10 @@ const Map = ({ userInfo, isLogin }) => {
   // 입력 시마다 검색 함수에 들어가게 하는 onChange 함수
   const onChange = (e) => {
     setInputText(e.target.value);
-    if (e.target.value.length >= 2) {
-      setSearch(e.target.value); // 이 입력되는 값을 검색함수의 파라미터로 줘야함
+    if (InputText.length >= 2) {
+      setSearch(InputText); // 이 입력되는 값을 검색함수의 파라미터로 줘야함
     } else {
-      setSearch('');
+      setSearch(' ');
       setPlaces([]);
     }
   };
@@ -46,18 +46,14 @@ const Map = ({ userInfo, isLogin }) => {
   // 자동완성 리스트에 뜬 장소 이름을 마우스로 클릭하면, 해당 장소 이름으로 search state를 변경
   const handleClickPlaceName = (item) => {
     console.log(item.target.innerHTML);
-    setSearch(item.target.innerHTML);
     setInputText(item.target.innerHTML);
+    setSearch(item.target.innerHTML);
   };
-
-  
-
 
   useEffect(async () => {
     // 마커를 클릭했을 때 장소 이름이 인포윈도우로 뜨는 창
     var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
     var markers = [];
-
 
     const container = document.getElementById('map');
     const options = {
@@ -73,18 +69,34 @@ const Map = ({ userInfo, isLogin }) => {
     function placesSearchCB(data, status, pagination) {
       if (status === kakao.maps.services.Status.OK) {
         let bounds = new kakao.maps.LatLngBounds();
-
+        // 배열 내 요소 중복으로 삽입되는 것을 방지하는 filter
+        const filtered = [];
+        // 최종적으로 리스트에 담겨질 배열
+        const placeList = [];
         for (let i = 0; i < data.length; i++) {
-          displayMarker(data[i]);
-          bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+          if (
+            data[i].category_group_name === '음식점' ||
+            data[i].category_group_name === '카페' ||
+            data[i].category_group_name !== ''
+          ) {
+            displayMarker(data[i]);
+            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+            map.setBounds(bounds);
+            // 반복 중, filtered 내의 객체의 해당 id값이 있는지 확인
+            if (!filtered.includes(data[i].id)) {
+              // 만약 중복되지 않았다면, id 값을 filter에 삽입
+              filtered.push(data[i].id);
+              // 최종적으로 리스트에 담겨질 배열에 해당 객체를 삽입
+              placeList.push(data[i]);
+            }
+          }
         }
-
-        map.setBounds(bounds);
+        // 최종 리스트에 있는 요소들을 검색 결과 출력용 State(Places)에 담아줌
+        setPlaces(placeList);
 
         // 검색 결과를 Places(State)에 담아줌
-        setPlaces(data);
 
-        console.log(Places); //Places 는 배열(배열 안에 장소 정보가 객체로 저장)
+        //Places 는 배열(배열 안에 장소 정보가 객체로 저장)
         //이 배열 내 객체들의 place_name과 address_name을 map해야함(자동완성)
       }
     }
@@ -102,10 +114,9 @@ const Map = ({ userInfo, isLogin }) => {
         );
         infowindow.open(map, marker);
         handleClickStore();
-        ClickedMaker(place)
+        ClickedMaker(place);
       });
     }
-
 
     await axios({
       // 핀조회 axios 요청
@@ -159,7 +170,13 @@ const Map = ({ userInfo, isLogin }) => {
 
   return (
     <>
-      {newStoreClick ? (<AddNewStore clickMaker={clickMaker} userInfo={userInfo} handleClickStore={handleClickStore} />) : null}
+      {newStoreClick ? (
+        <AddNewStore
+          clickMaker={clickMaker}
+          userInfo={userInfo}
+          handleClickStore={handleClickStore}
+        />
+      ) : null}
       <div className="inputform">
         <form>
           <input
@@ -170,7 +187,9 @@ const Map = ({ userInfo, isLogin }) => {
           <button type="submit">검색 로고(돋보기)</button>
           <div className="search-autocomplete-box">
             {Places.map((item) => (
-              <ul onClick={handleClickPlaceName}>{item.place_name}</ul>
+              <ul key={item.id} onClick={handleClickPlaceName}>
+                {item.place_name}
+              </ul>
             ))}
           </div>
         </form>
