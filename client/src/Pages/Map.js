@@ -23,8 +23,6 @@ const Map = ({ userInfo, isLogin }) => {
   const [currentMaker, setCurrentMaker] = useState(null);
   const [isClick, setIsClick] = useState(false);
 
-  // const token = userInfo.accessToken.data.accessToken;
-
   const handleClickStore = () => {
     setNewStoreClick(!newStoreClick);
   };
@@ -129,9 +127,6 @@ const Map = ({ userInfo, isLogin }) => {
         longitude: 126.97704325823415,
         like: false,
       },
-      // headers: {
-      //   Authorization: `Bearer ${token}`,
-      // },
       withCredentials: true,
     })
       .then((res) => {
@@ -201,15 +196,11 @@ const Map = ({ userInfo, isLogin }) => {
       </div>
       <div className="with-map-siderbar">
         {isClick ? (
-          <StoreList
-            currentMaker={currentMaker}
-            userInfo={userInfo}
-            isLogin={isLogin}
-          />
+          <StoreList currentMaker={currentMaker} userInfo={userInfo} isLogin={isLogin} newStoreClick={newStoreClick} handleClickStore={handleClickStore} />
         ) : (
           <StoreListSiderBar />
         )}
-        <div id="map"></div>
+      <div id="map"></div>
       </div>
     </>
   );

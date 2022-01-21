@@ -44,11 +44,12 @@ function Reviews({ marker, userInfo, isLogin }) {
     <>
     <div id='review-box'>
       <div id='review-txt'>
-      리뷰 : {marker.content}
+        리뷰 : {marker.content}
       </div>
       {isLogin?
-      <div id='delete-review' onClick={() => handleDeleteReview()} >X</div>
-      : null
+      <div id='delete-review' onClick={() => handleDeleteReview()}>
+        X
+      </div> : null
       }
     </div>
     </>

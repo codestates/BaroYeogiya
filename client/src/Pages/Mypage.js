@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import WithDrawal from '../Components/Modals/WithDrawal';
 import ModifyUser from '../Components/Modals/ModifyUser';
@@ -20,49 +20,13 @@ export default function Mypage({
   handleIsLogin,
   handleResponse,
 }) {
-  const token = userInfo.accessToken.data.accessToken;
 
   const [userName, setUserName] = useState('');
 
   const handleUserName = (name) => {
     setUserName(name);
   };
-  const [myList, setMylist] = useState([]);
-
-  const likeStore = () => {
-    // 찜한 매장 조회
-    axios({
-      url: `${process.env.REACT_APP_SERVER_URL}/store/my-list`,
-      method: 'GET',
-      params: {
-        // offset :
-        // limit :
-      },
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      withCredentials: true,
-    })
-      .then((res) => {
-        if (res.status === 200) {
-          const getStore = res.data.data;
-
-          for (let i = 0; i < getStore.length; i++) {
-            const likeMyStore = getStore[i];
-            console.log('likeMyStore', likeMyStore);
-            setMylist((current) => [...current, likeMyStore]);
-          }
-        } else if (res.status === 400) {
-          alert('존재하지 않는 유저입니다.');
-        } else if (res.status === 401) {
-          alert('액세스 토큰이 만료되었습니다.');
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
+  
   if (!withDrawalModal && !modifyModal && !cartlistModal) {
     return (
       <>
@@ -79,10 +43,8 @@ export default function Mypage({
             className="cart-list-tab"
             onClick={() => {
               handleCartlistModal();
-              likeStore();
             }}
           >
-            {' '}
             찜 목록
           </p>
         </div>
@@ -113,7 +75,6 @@ export default function Mypage({
             className="cart-list-tab"
             onClick={() => {
               handleCartlistModal();
-              likeStore();
             }}
           >
             찜 목록
@@ -138,7 +99,6 @@ export default function Mypage({
             className="cart-list-tab"
             onClick={() => {
               handleCartlistModal();
-              likeStore();
             }}
           >
             찜 목록
@@ -163,16 +123,13 @@ export default function Mypage({
             className="cart-list-tab"
             onClick={() => {
               handleCartlistModal();
-              likeStore();
             }}
           >
             찜 목록
           </p>
         </div>
         <div className="store-card-container">
-          {myList.map((like) => (
-            <CartList like={like} userInfo={userInfo} />
-          ))}
+          <CartList userInfo={userInfo} />
         </div>
       </>
     );
