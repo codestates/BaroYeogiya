@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../../Css/ModifyUser.css';
-import FooterBar from '../FooterBar';
 export default function MoidfyUser({ userInfo, userName }) {
   const [modifyInfo, setModifyInfo] = useState({
     name: '',
@@ -78,61 +77,58 @@ export default function MoidfyUser({ userInfo, userName }) {
   return (
     <>
       <div className="modifyuser-box">
-        <center>
-          <h2 id="signup-title">회원정보 수정</h2>
-          <form onSubmit={(e) => e.preventDefault()}>
-            <div>
-              변경할 닉네임
-              <div className="input-field">
-                <input
-                  type="text"
-                  onChange={handleInputValue('name')}
-                  className="input-width"
-                  placeholder="사용하실 닉네임을 입력해주세요."
-                  defaultValue={userName}
-                />
-              </div>
+        <h2 id="signup-title">회원정보 수정</h2>
+        <form onSubmit={(e) => e.preventDefault()}>
+          <div>
+            <p>변경할 닉네임</p>
+            <div className="input-field">
+              <input
+                type="text"
+                onChange={handleInputValue('name')}
+                className="input-width"
+                placeholder="사용하실 닉네임을 입력해주세요."
+                defaultValue={userName}
+              />
             </div>
-            <div>
-              현재 비밀번호
-              <div className="password-field">
-                <input
-                  type="password"
-                  onChange={handleInputValue('currentpw')}
-                  className="input-width"
-                  placeholder="비밀번호"
-                />
-              </div>
+          </div>
+          <div>
+            <p>현재 비밀번호</p>
+            <div className="password-field">
+              <input
+                type="password"
+                onChange={handleInputValue('currentpw')}
+                className="input-width"
+                placeholder="비밀번호"
+              />
             </div>
-            <div>
-              변경할 비밀번호
-              <div className="password-field">
-                <input
-                  type="password"
-                  onChange={handleInputValue('modifiedpw')}
-                  className="input-width"
-                  placeholder="비밀번호 확인"
-                />
-              </div>
+          </div>
+          <div>
+            <p>변경할 비밀번호</p>
+            <div className="password-field">
+              <input
+                type="password"
+                onChange={handleInputValue('modifiedpw')}
+                className="input-width"
+                placeholder="비밀번호 확인"
+              />
             </div>
-            <div>
-              비밀번호 확인
-              <div className="password-field">
-                <input
-                  type="password"
-                  onChange={handleInputValue('modifiedpwconfirm')}
-                  className="input-width"
-                  placeholder="비밀번호 확인"
-                />
-              </div>
+          </div>
+          <div>
+            <p>비밀번호 확인</p>
+            <div className="password-field">
+              <input
+                type="password"
+                onChange={handleInputValue('modifiedpwconfirm')}
+                className="input-width"
+                placeholder="비밀번호 확인"
+              />
             </div>
-            <button className="btn" type="submit" onClick={handleModify}>
-              회원정보 수정
-            </button>
-            <div className="alert-box">{errorMessage}</div>
-          </form>
-        </center>
-        <FooterBar />
+          </div>
+          <p className="alert-box">{errorMessage}</p>
+          <button className="btn" type="submit" onClick={handleModify}>
+            <p>회원정보 수정</p>
+          </button>
+        </form>
       </div>
     </>
   );

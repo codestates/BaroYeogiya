@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import '../../Css/WithDrawal.css';
 import { useNavigate } from 'react-router';
-import FooterBar from '../FooterBar';
 axios.defaults.withCredentials = true;
 
 export default function WithDrawal({ userInfo, handleIsLogin }) {
@@ -72,27 +71,24 @@ export default function WithDrawal({ userInfo, handleIsLogin }) {
   };
   return (
     <div className="withdrawal-box">
-      <center>
-        <h2 id="signup-title">회원탈퇴</h2>
-        <form onSubmit={(e) => e.preventDefault()}>
-          <div>
-            비밀번호 확인
-            <div className="password-field">
-              <input
-                type="password"
-                onChange={handleInputValue('pw')}
-                className="input-width"
-                placeholder="비밀번호"
-              />
-            </div>
+      <h2 id="signup-title">회원탈퇴</h2>
+      <form onSubmit={(e) => e.preventDefault()}>
+        <div>
+          <p>비밀번호 확인</p>
+          <div className="password-field">
+            <input
+              type="password"
+              onChange={handleInputValue('pw')}
+              className="input-width"
+              placeholder="비밀번호"
+            />
           </div>
-          <button className="btn" type="submit" onClick={requestWithDrawal}>
-            회원탈퇴
-          </button>
-          <div className="alert-box">{errorMessage}</div>
-        </form>
-      </center>
-      <FooterBar />
+        </div>
+        <p className="alert-box">{errorMessage}</p>
+        <button className="btn" type="submit" onClick={requestWithDrawal}>
+          회원탈퇴
+        </button>
+      </form>
     </div>
   );
 }

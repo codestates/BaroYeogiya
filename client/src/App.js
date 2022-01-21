@@ -5,6 +5,7 @@ import NavBar from './Components/NavBar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Mypage from './Pages/Mypage';
 import Map from './Pages/Map';
+import FooterBar from './Components/FooterBar';
 
 function App() {
   // 로그인 상태 => window 전역 객체에 저장하고 조회
@@ -75,38 +76,50 @@ function App() {
           handleInitializeMypage={handleInitializeMypage}
           isLogin={isLogin}
         />
-        <Routes>
-          <Route
-            exact
-            path="/"
-            element={<MainPage isLogin={isLogin} />}
-          ></Route>
-          <Route
-            exact
-            path="/mypage"
-            element={
-              <Mypage
-                userInfo={userInfo}
-                handleWithDrawalModal={handleWithDrawalModal}
-                handleModifyModal={handleModifyModal}
-                handleCartlistModal={handleCartlistModal}
-                handleInitializeMypage={handleInitializeMypage}
-                withDrawalModal={withDrawalModal}
-                modifyModal={modifyModal}
-                cartlistModal={cartlistModal}
-                handleIsLogin={handleIsLogin}
-                handleResponse={handleResponse}
-              />
-            }
-          ></Route>
-          <Route
-            exact
-            path="/mappage"
-            element={
-              <Map userInfo={userInfo} isLogin={isLogin} />
-            }
-          ></Route>
-        </Routes>
+        <div className="content">
+          <Routes>
+            <Route
+              exact
+              path="/"
+              element={
+                <>
+                  <MainPage isLogin={isLogin} />
+                  <FooterBar />
+                </>
+              }
+            ></Route>
+            <Route
+              exact
+              path="/mypage"
+              element={
+                <>
+                  <div className="content-mypage">
+                    <Mypage
+                      userInfo={userInfo}
+                      handleWithDrawalModal={handleWithDrawalModal}
+                      handleModifyModal={handleModifyModal}
+                      handleCartlistModal={handleCartlistModal}
+                      handleInitializeMypage={handleInitializeMypage}
+                      withDrawalModal={withDrawalModal}
+                      modifyModal={modifyModal}
+                      cartlistModal={cartlistModal}
+                      handleIsLogin={handleIsLogin}
+                      handleResponse={handleResponse}
+                    />
+                  </div>
+                  <FooterBar />
+                </>
+              }
+            ></Route>
+            <Route
+              exact
+              path="/mappage"
+              element={
+                <Map userInfo={userInfo} isLogin={isLogin} />
+              }
+            ></Route>
+          </Routes>
+        </div>
       </Router>
     </div>
   );
