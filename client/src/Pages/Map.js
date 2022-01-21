@@ -13,13 +13,15 @@ import AddNewStore from '../Components/Modals/AddNewStore';
 
 const { kakao } = window;
 
-const Map = ({ userInfo }) => {
+const Map = ({ userInfo, isLogin }) => {
   // 입력 칸(검색어를 입력하세요 부분)에 들어가는 문자열 state
   const [InputText, setInputText] = useState('');
   // 장소 입력에 들어가는 입력값
   const [search, setSearch] = useState('');
   const [newStoreClick, setNewStoreClick] = useState(false);
   const [clickMaker, setClickMaker] = useState();
+  const [currentMaker, setCurrentMaker] = useState(null);
+  const [isClick, setIsClick] = useState(false);
 
   const handleClickStore = () => {
     setNewStoreClick(!newStoreClick);
@@ -48,22 +50,14 @@ const Map = ({ userInfo }) => {
     setInputText(item.target.innerHTML);
   };
 
-  const [currentMaker, setCurrentMaker] = useState(null);
-  // const [like, setLike] = useState(true)
-  const [isClick, setIsClick] = useState(false);
+  
 
-  // const [ isAuth, setIsAuth ] = useState(null)
-
-  // const [mapLatitude, setMapLatitude] = useState()
-  // const [mapLongitude, setMapLongitude] = useState()
 
   useEffect(async () => {
     // 마커를 클릭했을 때 장소 이름이 인포윈도우로 뜨는 창
     var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
     var markers = [];
 
-    // app.js에서 props로 내려준 값이다.
-    const token = userInfo.accessToken.data.accessToken;
 
     const container = document.getElementById('map');
     const options = {
@@ -112,34 +106,7 @@ const Map = ({ userInfo }) => {
       });
     }
 
-    // 내 위치 조회 api는 위도,경도 값은 0이 들어온다. test 아이디는 위도, 경도 값이 있지만 해당 값을 pin api에서 이용하면 파라미터를 에러코드 400 뜸
-    // axios({
-    //   url: `${process.env.REACT_APP_SERVER_URL}/map`,
-    //   method : 'GET',
-    //   headers : {
-    //     Authorization : `Bearer ${token}`
-    //   }
-    // })
-    // .then((res) => {
-    //   console.log('내 위차?', res)
-    //   const myLatitude = res.data.data.latitude
-    //   const myLongitude = res.data.data.longitude
-    //   if(res.status === 200){
-    //     setMapLatitude(myLatitude)
-    //     setMapLongitude(myLongitude)
-    //   }
-    //   else if(res.status === 401){
-    //     alert('액세스 토큰이 만료되었습니다.')
-    //   }
-    //   else if (res.status === 401) {
-    //     alert('액세스 토큰이 잘못 되었습니다.')
-    //   }
-    // })
-    // .catch((error)=>{
-    //   console.log(error)
-    // })
 
-    // like가 true일땐 핀조회 데이터가 빈배열이다. 위치도 false일때와 똑같은데 왜지?
     await axios({
       // 핀조회 axios 요청
       url: `${process.env.REACT_APP_SERVER_URL}/map/pin`,
@@ -147,10 +114,7 @@ const Map = ({ userInfo }) => {
       params: {
         latitude: 37.57961509140872,
         longitude: 126.97704325823415,
-        like: true,
-      },
-      headers: {
-        Authorization: `Bearer ${token}`,
+        like: false,
       },
       withCredentials: true,
     })
@@ -213,11 +177,11 @@ const Map = ({ userInfo }) => {
       </div>
       <div className="with-map-siderbar">
         {isClick ? (
-          <StoreList currentMaker={currentMaker} userInfo={userInfo} />
+          <StoreList currentMaker={currentMaker} userInfo={userInfo} isLogin={isLogin} newStoreClick={newStoreClick} handleClickStore={handleClickStore} />
         ) : (
           <StoreListSiderBar />
         )}
-        <div id="map"></div>
+      <div id="map"></div>
       </div>
     </>
   );

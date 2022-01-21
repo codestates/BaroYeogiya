@@ -41,8 +41,6 @@ export default function MoidfyUser({ userInfo, userName }) {
       })
         .then((result) => {
           if (result.status === 200) {
-            //이 경우에만 회원정보 수정
-            console.log('Success');
             axios({
               method: 'PATCH',
               url: `${process.env.REACT_APP_SERVER_URL}/user`,
