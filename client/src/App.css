@@ -2,13 +2,16 @@ html, body {
   font-size: 0.5208vw;
 }
 
-
-/* .wrap {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
+.content {
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - 90px);
 }
 
-main {
-  flex: 1;
-} */
+.content-mypage {
+  width: 50rem;
+  min-height: 30rem;
+  margin-top: 4rem;
+  margin-left: calc(50% - 25rem);
+  padding-bottom: 150px;
+}

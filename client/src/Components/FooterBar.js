@@ -16,10 +16,8 @@ function FooterBar() {
           >
             Wiki
           </a>
-        </div>
-        <div>
-          <a href="https://github.com/codestates/BaroYeogiya" target="_blank">
-            Repository
+            <a href="https://github.com/codestates/BaroYeogiya" target="_blank">
+              Repository
           </a>
         </div>
       </div>
@@ -29,13 +27,9 @@ function FooterBar() {
           <a href="https://github.com/Brian-free1" target="_blank">
             정채련 @github
           </a>
-        </div>
-        <div>
           <a href="https://github.com/qkrwlgh123" target="_blank">
             박지호 @github
           </a>
-        </div>
-        <div>
           <a href="https://github.com/amazer001" target="_blank">
             강명우 @github
           </a>

@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 import ModifyUser from '../Components/Modals/ModifyUser';
 import '../Css/UserInfo.css';
 import axios from 'axios';
-import FooterBar from './FooterBar';
 export default function UserInfo({
   userInfo,
   userName,
@@ -70,16 +69,17 @@ export default function UserInfo({
   }, []);
   return (
     <div className="userinfo-box">
-      <center>
-        <h2 id="signup-title">회원정보</h2>
-        <div>
-          이름
-          <div>{userName ? userName : ''}</div>
-        </div>
-        <div>
-          id
-          <div>{userId ? userId : ''}</div>
-        </div>
+      <h2 id="signup-title">회원정보</h2>
+      <div>
+        <p>이름</p>
+        <p>{userName ? userName : ''}</p>
+      </div>
+      <div>
+        <p>아이디</p>
+        <p>{userId ? userId : ''}</p>
+      </div>
+      <p className="alert-box">{errorMessage}</p>
+      <div className="signup-btns">
         <button
           onClick={() => {
             handleModifyModal();
@@ -94,9 +94,7 @@ export default function UserInfo({
         >
           회원 탈퇴
         </button>
-        <div className="alert-box">{errorMessage}</div>
-      </center>
-      <FooterBar />
+      </div>
     </div>
   );
 }

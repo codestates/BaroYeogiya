@@ -1,0 +1,30 @@
+.store-card-box {    
+    display: flex;
+    padding: 2rem 0;
+    border-bottom: 1px solid lightgrey;
+}
+
+.store-card-box .my-store-map {
+    width: 7rem;
+    height: 7rem;
+    border-radius: 2.5rem;
+}
+
+.store-card-box .my-store-name {
+    width: calc(100% - 15rem);
+    font-size: 1.2rem;
+    font-weight: 500;
+    line-height: 7rem;
+    text-align: center;
+}
+
+.store-card-box button {
+    width: 8rem;
+    border: 0;
+    box-sizing: border-box;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: white;
+    background-color: #BEE9B4;
+    cursor: pointer;
+}

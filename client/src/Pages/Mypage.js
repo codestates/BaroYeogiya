@@ -4,7 +4,6 @@ import WithDrawal from '../Components/Modals/WithDrawal';
 import ModifyUser from '../Components/Modals/ModifyUser';
 import UserInfo from '../Components/UserInfo';
 import CartList from '../Components/CartList';
-import FooterBar from '../Components/FooterBar';
 import '../Css/MyPage.css';
 
 // 마이페이지 컴포넌트
@@ -22,6 +21,8 @@ export default function Mypage({
 }) {
 
   const [userName, setUserName] = useState('');
+  const [tabActiveUser, setTabActiveUser] = useState('active');
+  const [tabActiveCart, setTabActiveCart] = useState('');
 
   const handleUserName = (name) => {
     setUserName(name);
@@ -32,16 +33,20 @@ export default function Mypage({
       <>
         <div className="info-tab-box">
           <p
-            className="user-info-tab"
+            className={tabActiveUser}
             onClick={() => {
+              setTabActiveUser('active');
+              setTabActiveCart('');
               handleInitializeMypage();
             }}
           >
             회원 정보
           </p>
           <p
-            className="cart-list-tab"
+            className={tabActiveCart}
             onClick={() => {
+              setTabActiveUser('');
+              setTabActiveCart('active');
               handleCartlistModal();
             }}
           >
@@ -64,16 +69,20 @@ export default function Mypage({
       <>
         <div className="info-tab-box">
           <p
-            className="user-info-tab"
+            className={tabActiveUser}
             onClick={() => {
+              setTabActiveUser('active');
+              setTabActiveCart('');
               handleInitializeMypage();
             }}
           >
             회원 정보
           </p>
           <p
-            className="cart-list-tab"
+            className={tabActiveCart}
             onClick={() => {
+              setTabActiveUser('');
+              setTabActiveCart('active');
               handleCartlistModal();
             }}
           >
@@ -88,16 +97,20 @@ export default function Mypage({
       <>
         <div className="info-tab-box">
           <p
-            className="user-info-tab"
+            className={tabActiveUser}
             onClick={() => {
+              setTabActiveUser('active');
+              setTabActiveCart('');
               handleInitializeMypage();
             }}
           >
             회원 정보
           </p>
           <p
-            className="cart-list-tab"
+            className={tabActiveCart}
             onClick={() => {
+              setTabActiveUser('');
+              setTabActiveCart('active');
               handleCartlistModal();
             }}
           >
@@ -112,16 +125,20 @@ export default function Mypage({
       <>
         <div className="info-tab-box">
           <p
-            className="user-info-tab"
+            className={tabActiveUser}
             onClick={() => {
+              setTabActiveUser('active');
+              setTabActiveCart('');
               handleInitializeMypage();
             }}
           >
             회원 정보
           </p>
           <p
-            className="cart-list-tab"
+            className={tabActiveCart}
             onClick={() => {
+              setTabActiveUser('');
+              setTabActiveCart('active');
               handleCartlistModal();
             }}
           >
