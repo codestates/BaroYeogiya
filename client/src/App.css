@@ -3,13 +3,15 @@ html, body {
 }
 
 .content {
+  position: relative;
   width: 100%;
   min-height: calc(100vh - 90px);
 }
 
 .content-mypage {
-  width: 30rem;
+  width: 50rem;
   min-height: 30rem;
   margin-top: 4rem;
-  margin-left: calc(50% - 15rem);
+  margin-left: calc(50% - 25rem);
+  padding-bottom: 150px;
 }

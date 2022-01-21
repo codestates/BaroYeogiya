@@ -1,6 +1,8 @@
 
 .info-tab-box {
   display: flex;
+  width: 30rem;
+  margin-left: 10rem;
   font-size: 2rem;
   font-weight: 500;
   line-height: 4rem;
