@@ -1,41 +1,51 @@
 
-#entire-box{
-  margin-left: 300px;
-  width: 200px;
-  height: 100vh;
+#entire-box {
   position: fixed;
+  width: 30rem;
+  height: calc(100% - 90px - 14rem);
+  top: calc(90px + 7rem);
+  left: calc(50% - 15rem);
   display: flex;
   justify-content: center;
+  z-index: 3;
 }
 
-#review-entire-box{
+#review-entire-box {
+  position: relative;
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  background-color: beige;
+  border: 0.2rem solid #BEE9B4;
+  border-radius: 0.5rem;
+  box-shadow: 0.1rem 0.1rem 0.5rem 0.1rem grey;
+  box-sizing: border-box;
+  background-color: white;
 }
 
-#reviews-scroll-box{
-  overflow: auto;
+#review-entire-box>img {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 1.4rem;
+  height: 1.4rem;
+  cursor: pointer;
+}
+
+#store-name {
   width: 100%;
-  height: 300px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: blueviolet;
+  height: 7rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+  line-height: 7rem;
+  text-align: center;
 }
 
-
-#review{
-  width: 100%;
-  /* background-color: cadetblue; */
-}
-
-#register-review{
-  height: 20px;
-}
-
-#register-my-pick{
-  height: 20px;
+#register-my-pick {
+  position: absolute;
+  width: 5rem;
+  height: 2rem;
+  top: 5rem;
+  left: calc(50% - 2.5rem);
+  border: 0;
+  background-color: #BEE9B4;
+  cursor: pointer;
 }

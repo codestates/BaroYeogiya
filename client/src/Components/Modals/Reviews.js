@@ -2,9 +2,9 @@ import axios from 'axios';
 import * as React from 'react';
 import '../../Css/Reviews.css'
 
-function Reviews({ marker, userInfo, isLogin }) {
+function Reviews({ userUuid, review, userInfo, searchReview }) {
   
-  const reviewId = marker.review_uuid
+  const reviewId = review.review_uuid
 
   const handleDeleteReview = async () => { // 리뷰 삭제
     const token = userInfo.accessToken.data.accessToken;
@@ -17,10 +17,9 @@ function Reviews({ marker, userInfo, isLogin }) {
       withCredentials: true
     })
     .then((res)=>{
-      console.log('머임?', res)
       if(res.status === 200){
-        alert('삭제에 성공했습니다.')
-        // 새로고침 기능이 되게 하는 기능을 넣어야 하나???
+        alert('삭제에 성공했습니다.');
+        searchReview();
       }
       else if(res.status === 400){
         alert('존재하지 않는 리뷰입니다.')
@@ -41,18 +40,12 @@ function Reviews({ marker, userInfo, isLogin }) {
   }
 
   return(
-    <>
-    <div id='review-box'>
-      <div id='review-txt'>
-        리뷰 : {marker.content}
-      </div>
-      {isLogin?
-      <div id='delete-review' onClick={() => handleDeleteReview()}>
-        X
-      </div> : null
-      }
-    </div>
-    </>
+    <li>
+      {review.content}
+      {review.user_uuid === userUuid ? 
+        <button onClick={handleDeleteReview}>리뷰 삭제</button>
+        : ''}
+    </li>
   )
 }
 
