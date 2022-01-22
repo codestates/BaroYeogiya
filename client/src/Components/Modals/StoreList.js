@@ -13,7 +13,7 @@ const StoreList = ({ currentMaker, userInfo, isLogin, newStoreClick, handleClick
   const [storeClick, setStoreClick] = useState(false)
   const [storeId, setStoreId] = useState(null)
   const [storeInfo, setStoreInfo] = useState([])
-  
+  console.log('storeInfo', storeInfo)
 
   const showReview = () => {
     setStoreClick(true); //리뷰 리스트 보여주는 함수
@@ -30,15 +30,20 @@ const StoreList = ({ currentMaker, userInfo, isLogin, newStoreClick, handleClick
     })
     .then((res)=>{
       if(res.status === 200){ // 응답을 state에 저장
-        const storeNames = res.data.data
-        console.log('이름?', storeNames)
+        const storeNames = res.data.data;
+
+        const storeBox = [];
+        setStoreClick(false)
+
         for(let i = 0; i < storeNames.length; i++){
           const storeUuid = storeNames[i].store_uuid // 가게 id , data 구조분해 할당으로 바꾸는거 생각 해 보기
           const storeInfoList = storeNames[i]
+
           setStoreId(storeUuid);
-          setStoreInfo(current => [...current, storeInfoList])
+          storeBox.push(storeInfoList)
+
         }
-        
+        setStoreInfo(storeBox)
       }
       else if(res.status === 400){
         alert('위도 또는 경도를 입력하지 않았거나, 잘못 입력되었습니다.');
@@ -47,21 +52,18 @@ const StoreList = ({ currentMaker, userInfo, isLogin, newStoreClick, handleClick
     .catch((error)=>{
       console.log(error);
     })
-  }, []);
+  }, [currentMaker]);
 
 
   return (
     <>
       {storeClick ? <SelectedStore storeInfo={storeInfo} userInfo={userInfo} storeId={storeId} isLogin={isLogin} /> : null }
-      {newStoreClick ? <AddNewStore currentMaker={currentMaker} userInfo={userInfo} /> : null}
+      {newStoreClick ? <AddNewStore currentMaker={currentMaker} userInfo={userInfo} handleClickStore={handleClickStore} /> : null}
       <div id='map-store-list-box'>
         <div id='map-store-list'>
-          <div id='map-siderbar'>
-            <button className='bt'>로고</button>
-          </div>
           <div id='pin-store'>
             {storeInfo.map((res)=>
-              <button className='bt' onClick={() => { showReview(); } }>
+              <button className='bt' key={res.store_uuid} onClick={() => { showReview(); } }>
                 {res.address}
               </button>
             )}

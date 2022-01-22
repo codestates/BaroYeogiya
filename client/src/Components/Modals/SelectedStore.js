@@ -28,11 +28,14 @@ function SelectedStore({ storeId, userInfo, isLogin }) { // storeList에서 넘�
     .then((res)=>{
       if(res.status === 200){
         const reviewlist = res.data.data
-        console.log('store 리뷰', reviewlist)
+        const currentReview = [];
+        
         for(let i = 0; i < reviewlist.length; i++){
           const reviewContent = reviewlist[i]
-          setStoreReview(current => [...current, reviewContent])
+          currentReview.push(reviewContent)
+
         }
+        setStoreReview(currentReview)
       }
       else if(res.status === 400){
         alert('파라미터가 누락되었거나 잘못되었습니다.')
@@ -41,7 +44,7 @@ function SelectedStore({ storeId, userInfo, isLogin }) { // storeList에서 넘�
     .catch((error)=>{
       console.log(error)
     })
-  },[])
+  },[storeReviews])
 
   
   const onClickReview = async () => { // 리뷰 작성 후 버튼 클릭을 했을 시 작동되는 함수(리뷰 등록)
@@ -121,12 +124,8 @@ function SelectedStore({ storeId, userInfo, isLogin }) { // storeList에서 넘�
   return(
     <div id='entire-box'>
       <div id='review-entire-box'>
-        <header>
-          <div id='store-name'>대나무</div>
-        </header>
-        <img id='store-img'></img>
         <div id='reviews-scroll-box'>
-          {storeReviews.map((marker, idx) => <Reviews key={idx} marker={marker} userInfo={userInfo} isLogin={isLogin} />) }
+          { storeReviews.map((marker, idx) => <Reviews key={idx} marker={marker} userInfo={userInfo} isLogin={isLogin} />) }
         </div>
           <input id='review-write' onChange={handleReviewTxt} ></input>
           {isLogin?
