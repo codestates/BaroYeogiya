@@ -1,12 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import '../Css/Map.css';
-// import { Link } from "react-router-dom";
 import axios from 'axios';
-// import { like } from "sequelize/types/lib/operators";
-// import UserNavBar from '../Components/UserNavBar';
-// import Login from "../Components/Modals/Login";
-// import SelectedStore from '../Components/Modals/SelectedStore'
 import StoreList from '../Components/Modals/StoreList';
 import AddNewStore from '../Components/Modals/AddNewStore';
 

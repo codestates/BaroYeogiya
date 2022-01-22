@@ -1,6 +1,6 @@
 import '../../Css/Map.css'
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
 function AddNewStore({ clickMaker, currentMaker, userInfo, handleClickStore, updateStoreList }) {
