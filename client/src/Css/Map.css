@@ -1,9 +1,8 @@
 #map {
-  position: fixed;
-  left: 500px;
+  position: relative;
   z-index: 1;
-  width: 80%;
-  height: 100vh;
+  width: 100%;
+  height: calc(100vh - 90px);
 }
 
 .like-bt{
@@ -13,73 +12,118 @@
 }
 
 .with-map-siderbar {
+  position: relative;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 90px);
 }
 
 .inputform {
-  position: fixed;
-  padding-top: 10px;
+  position: absolute;
+  top: 2.5rem;
+  left: calc(50% - 10rem);
+  padding: 0.5rem;
+  border: 0.2rem solid #BEE9B4;
+  border-radius: 0.5rem;
+  box-shadow: 0.1rem 0.1rem 0.5rem 0.1rem grey;
   background-color: white;
-  z-index: 999;
+  z-index: 2;
+}
+
+.inputform input {    
+  width: 15rem;
+  height: 2rem;
+  border: 0;
+  border-bottom: 1px solid lightgrey;
+  font-size: 1.1rem;
+  font-weight: 500;
+  box-sizing: border-box;
+}
+
+.inputform button {    
+  width: 4rem;
+  height: 2rem;
+  border: 0;
+  background-color: #BEE9B4;
+  cursor: pointer;
+}
+
+.inputform li {
+  padding: 0.8rem 0;
+  border-top: 1px solid lightgrey;
+  cursor: pointer;
+}
+.inputform li:first-child {
+  border-top: 0;
 }
 
 /* AddNewStore.css */
 
-.new-store-container{
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(37, 37, 37, 0.7);
-  z-index: 2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.new-store-container {
+  position: fixed;
+  width: 30rem;
+  height: calc(100% - 90px - 40rem);
+  top: calc(90px + 20rem);
+  left: calc(50% - 15rem);
+  border: 0.2rem solid #BEE9B4;
+  border-radius: 0.5rem;
+  box-shadow: 0.1rem 0.1rem 0.5rem 0.1rem grey;
+  box-sizing: border-box;
+  background-color: white;
+  z-index: 3;
 }
 
-.new-store-box{
-  width: 40%;
-  height: 50%;
-  /* z-index: 3; */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  background-color: #fff;
-}
-
-.img-box{
+.new-store-container>p {
   width: 100%;
-  height: 60%;
-  display: flex;
-  justify-content: space-around;
+  height: 7rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+  line-height: 7rem;
+  text-align: center;
 }
 
-.new-store-txt{
-  width: 20%;
-  height: 90%;
-  border-right: solid 1px #000;
+.new-store-container>img {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 1.4rem;
+  height: 1.4rem;
+  cursor: pointer;
 }
 
-.new-store-img{
-  width: 70%;
-  height: 100%;
+.new-store-container>button {
+  position: absolute;
+  width: 10rem;
+  height: 3rem;
+  bottom: 1rem;
+  left: calc(50% - 5rem);
+  border: 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+  background-color: #BEE9B4;
+  cursor: pointer;
 }
 
-.store-name-box{
+.store-name-box {
   width: 100%;
-  height: 10%;
+  height: 3rem;
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
 
-.new-store-name{
-  width: 20%;
-  height: 50%;
-  border-right: solid 1px #000;
+.store-name-box>p {
+  font-size: 1.1rem;
+  font-weight: 500;
+  width: 5rem;
+  text-align: center;
 }
 
-.store-name-input{
-  width: 70%;
-  height: 50%;
+.store-name-box>input {
+  width: calc(100% - 10rem);
+  height: 2rem;
+  border: 0;
+  border-bottom: 1px solid lightgrey;
+  font-size: 1.1rem;
+  font-weight: 500;
+  box-sizing: border-box;
 }

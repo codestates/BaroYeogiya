@@ -1,14 +1,88 @@
-
-
-#review-box{
-  width: 80%;
-  height: 20px;
-  border: solid 1px #000;
-  display: flex;
-  background-color: chartreuse;
+#review-entire-box ul {
+  padding: 0 1rem;
+  margin: 2rem 1rem;
+  max-height: calc(100% - 20rem);
+  overflow: auto;
 }
 
-#delete-review{
-  width: 10%;
-  background-color: chocolate;
+#review-entire-box ul::-webkit-scrollbar {
+  width: 0.2rem;
+}
+
+#review-entire-box ul::-webkit-scrollbar-thumb {
+  background-color: #BEE9B4;
+}
+
+#review-entire-box ul::-webkit-scrollbar-track {
+  background-color: none;
+}
+
+#review-entire-box li {    
+  position: relative;
+  width: 100%;
+  height: 3rem;
+  padding: 0.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid lightgrey;
+  font-size: 1.1rem;
+  font-weight: 500;
+  line-height: 2rem;
+  box-sizing: border-box;
+}
+
+#review-entire-box li:last-child {
+  margin-bottom: 0;
+}
+
+#review-entire-box li button {    
+  position: absolute;
+  width: 5rem;
+  height: 2rem;
+  right: 0;
+  border: 0;
+  background-color: #BEE9B4;
+  cursor: pointer;
+}
+
+#review-entire-box .cart-list-page {
+  display: flex;
+  width: calc(100% - 10rem);
+  margin-left: 5rem;
+  justify-content: space-around;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+#review-entire-box .cart-list-page p:first-child, #review-entire-box .cart-list-page p:last-child {
+    font-weight: 400;
+    cursor: pointer;
+}
+
+#review-entire-box #review-write {
+  position: absolute;
+  width: 100%;
+  height: 2rem;
+  bottom: 3rem;
+}
+
+#review-entire-box #review-write input {
+  position: absolute;
+  width: 18rem;
+  height: 2rem;
+  left: 3rem;
+  border: 0;
+  border-bottom: 1px solid lightgrey;
+  font-size: 1.1rem;
+  font-weight: 500;
+  box-sizing: border-box;
+}
+
+#review-entire-box #review-write button {
+  position: absolute;
+  width: 5rem;
+  height: 2rem;
+  right: 3rem;
+  border: 0;
+  background-color: #BEE9B4;
+  cursor: pointer;
 }

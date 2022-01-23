@@ -8,68 +8,44 @@ import '../../Css/NavBar.css'
 import '../../Css/StoreList.css'
 
 // 마커 클릭 후 siderBar에 나타나는 가게 리스트
-const StoreList = ({ currentMaker, userInfo, isLogin, newStoreClick, handleClickStore }) => { //map에서 props 넘겨줌
-
+const StoreList = ({ userUuid, currentMaker, userInfo, storeInfo, isLogin, clickMaker, newStoreClick, handleClickStore, exitClick, exitNewStore, updateStoreList }) => { //map에서 props 넘겨줌
   const [storeClick, setStoreClick] = useState(false)
-  const [storeId, setStoreId] = useState(null)
-  const [storeInfo, setStoreInfo] = useState([])
-  console.log('storeInfo', storeInfo)
+  const [selectStore, setSelectStore] = useState({});
 
-  const showReview = () => {
+  const showReview = (storeData) => {
     setStoreClick(true); //리뷰 리스트 보여주는 함수
+    setSelectStore(storeData);
   };
 
-  useEffect( async () => {
-    await axios({ // 가게 리스트를 요청
-      url: `${process.env.REACT_APP_SERVER_URL}/store`,
-      method : 'GET',
-      params : {
-        latitude: currentMaker.latitude,
-        longitude: currentMaker.longitude,
-      }
-    })
-    .then((res)=>{
-      if(res.status === 200){ // 응답을 state에 저장
-        const storeNames = res.data.data;
-
-        const storeBox = [];
-        setStoreClick(false)
-
-        for(let i = 0; i < storeNames.length; i++){
-          const storeUuid = storeNames[i].store_uuid // 가게 id , data 구조분해 할당으로 바꾸는거 생각 해 보기
-          const storeInfoList = storeNames[i]
-
-          setStoreId(storeUuid);
-          storeBox.push(storeInfoList)
-
-        }
-        setStoreInfo(storeBox)
-      }
-      else if(res.status === 400){
-        alert('위도 또는 경도를 입력하지 않았거나, 잘못 입력되었습니다.');
-      }
-    })
-    .catch((error)=>{
-      console.log(error);
-    })
-  }, [currentMaker]);
-
+  const handleStoreClick = () => {
+    setStoreClick(false);
+  }
 
   return (
     <>
-      {storeClick ? <SelectedStore storeInfo={storeInfo} userInfo={userInfo} storeId={storeId} isLogin={isLogin} /> : null }
-      {newStoreClick ? <AddNewStore currentMaker={currentMaker} userInfo={userInfo} handleClickStore={handleClickStore} /> : null}
+      {storeClick ? <SelectedStore userUuid={userUuid} selectStore={selectStore} userInfo={userInfo} isLogin={isLogin} handleStoreClick={handleStoreClick} /> : null }
+      {newStoreClick ? <AddNewStore clickMaker={clickMaker} currentMaker={currentMaker} userInfo={userInfo} handleClickStore={handleClickStore} updateStoreList={updateStoreList} /> : null}
       <div id='map-store-list-box'>
         <div id='map-store-list'>
           <div id='pin-store'>
-            {storeInfo.map((res)=>
-              <button className='bt' key={res.store_uuid} onClick={() => { showReview(); } }>
-                {res.address}
-              </button>
-            )}
-            {isLogin ?
-              <button className='bt' onClick={handleClickStore} >매장 등록</button> : null
-            }
+            <p>매장 리스트</p>
+            <img className="exit" src="Images/exit2.svg" onClick={exitClick}/>
+            <ul>
+              {storeInfo.length === 0 ? <li className="default">등록된 매장이 없어요..</li> :
+                  storeInfo.map((res)=>
+                  <li onClick={() => {
+                    showReview(res); 
+                    exitNewStore();
+                  }}>
+                    {res.address}
+                  </li>
+                )
+              }
+            </ul>
+            <button onClick={() => {
+              setStoreClick(false);
+              handleClickStore();
+            }}>찾는 매장이 없으신가요?</button>
           </div>
         </div>
       </div>
