@@ -31,6 +31,7 @@
 }
 
 .modifyuser-box>form>div>p:nth-child(2) {
+  width: calc(100% - 10rem);
   padding-left: 2rem;
 }
 

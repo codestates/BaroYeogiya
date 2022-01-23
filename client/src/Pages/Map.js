@@ -149,8 +149,14 @@ const Map = ({ userInfo, isLogin }) => {
     const map = new kakao.maps.Map(container, options);
     // 장소 검색 객체
     const ps = new kakao.maps.services.Places();
-    // search 검색어로 장소 검색을 함
-    ps.keywordSearch(search, placesSearchCB);
+    // 검색어가 담긴 state의 공백을 없애서 담음
+    let replaceSearch = search.replace(' ', '');
+    
+    // 검색어가 빈칸인지 확인
+    if (replaceSearch !== '') {
+      // search 검색어로 장소 검색을 함
+      ps.keywordSearch(search, placesSearchCB);
+    }
     // 장소 검색 시, 호출되는 콜백함수
     function placesSearchCB(data, status, pagination) {
       if (status === kakao.maps.services.Status.OK) {
@@ -161,9 +167,9 @@ const Map = ({ userInfo, isLogin }) => {
         for (let i = 0; i < data.length; i++) {
           if (
             data[i].category_group_name === '음식점' ||
-            data[i].category_group_name === '카페' ||
-            data[i].category_group_name !== ''
+            data[i].category_group_name === '카페'
           ) {
+            console.log(`asdfasdfs${data[i].category_group_name}dafsadfasdf`);
             // 반복 중, filtered 내의 객체의 해당 id값이 있는지 확인
             if (!filtered.includes(data[i].id)) {
               // 만약 중복되지 않았다면, id 값을 filter에 삽입
