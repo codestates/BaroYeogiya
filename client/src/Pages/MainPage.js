@@ -1,19 +1,41 @@
 import '../Css/MainPage.css';
-import NavBar from '../Components/NavBar';
 import FooterBar from '../Components/FooterBar';
+import { useNavigate } from 'react-router-dom';
 
 function MainPage() {
+  const navigate = useNavigate();
+  
   return (
     <div className="main-page-box">
       <div className="main-intro-box">
         <div className="main-first-intro">
-          <p>전국 식당들 평점을 편리하게 확인 해 보세요</p>
+          <div className="img-box">
+            <img src="Images/sample.gif" />
+          </div>
+          <div className="text-box">
+            <p>당신의 즐거운 식사를 만드는 곳 바로 여기야!</p>
+            <button onClick={() => navigate('/mappage')}>직접 확인하기</button>
+          </div>
         </div>
         <div className="main-second-intro">
-          <p>미리 방문해서 실망할 일을 줄일 수 있어요</p>
+          <div className="img-box">
+            <img src="Images/sample.gif" />
+          </div>
+          <div className="text-box">
+            <p>새로운 맛집을<br/>찾으셨나요?</p>
+            <p>발견한 맛집을 다른 사람들에게 알리세요!</p>
+            <button onClick={() => navigate('/mappage')}>직접 확인하기</button>
+          </div>
         </div>
         <div className="main-third-intro">
-          <p>멀리 여행갈 때 어느 식당을 방문할지 미리 확인하세요</p>
+          <div className="img-box">
+            <img src="Images/sample.gif" />
+          </div>
+          <div className="text-box">
+            <p>나만의 맛집 목록을 만들어보세요!</p>
+            <p>여러 의견을 참고해서,<br/>새로운 맛집을 나만의 공간에 담아보세요!</p>
+            <button onClick={() => navigate('/mappage')}>직접 확인하기</button>
+          </div>
         </div>
         <FooterBar />
       </div>
