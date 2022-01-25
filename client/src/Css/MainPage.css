@@ -14,6 +14,7 @@
 }
 
 .main-page-box .img-box {
+    position: relative;
     width: 30rem;
     height: 30rem;
     margin-left: calc(50% - 32.5rem);
@@ -23,9 +24,15 @@
     border: 1rem solid white;
 }
 
+.main-page-box .img-box:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+}
 .main-page-box .img-box img {
-    width: 100%;
+    position: absolute;
     height: 100%;
+    left: -45%;
 }
 
 .main-page-box .text-box {
