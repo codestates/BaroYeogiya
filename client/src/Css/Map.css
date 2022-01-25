@@ -61,8 +61,8 @@
 .new-store-container {
   position: fixed;
   width: 30rem;
-  height: calc(100% - 90px - 40rem);
-  top: calc(90px + 20rem);
+  height: calc(70% - 90px);
+  top: calc(90px + 10rem);
   left: calc(50% - 15rem);
   border: 0.2rem solid #BEE9B4;
   border-radius: 0.5rem;
