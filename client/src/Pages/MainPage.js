@@ -10,7 +10,7 @@ function MainPage() {
       <div className="main-intro-box">
         <div className="main-first-intro">
           <div className="img-box">
-            <img src="Images/sample.gif" />
+            <img src="Images/mainpage1.gif" />
           </div>
           <div className="text-box">
             <p>당신의 즐거운 식사를 만드는 곳 바로 여기야!</p>
@@ -19,7 +19,7 @@ function MainPage() {
         </div>
         <div className="main-second-intro">
           <div className="img-box">
-            <img src="Images/sample.gif" />
+            <img src="Images/mainpage2.gif" />
           </div>
           <div className="text-box">
             <p>새로운 맛집을<br/>찾으셨나요?</p>
@@ -29,7 +29,7 @@ function MainPage() {
         </div>
         <div className="main-third-intro">
           <div className="img-box">
-            <img src="Images/sample.gif" />
+            <img src="Images/mainpage3.gif" />
           </div>
           <div className="text-box">
             <p>나만의 맛집 목록을 만들어보세요!</p>
